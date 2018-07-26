@@ -1,0 +1,12 @@
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+   width: 150;
+  height: 100;
+}
+
+
+#block1 { 
+	margin: 12px;  
+}
