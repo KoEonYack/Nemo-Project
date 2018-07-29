@@ -32,7 +32,7 @@
 					<input type="text" class="form-control" placeholder="학번" name="studentNumber" maxlength="30">
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="핸드폰번호" name="phoneNumber" maxlength="30">  
+					<input type="text" class="form-control" placeholder="핸드폰번호 - 없이 입력해주세요" name="phoneNumber" maxlength="11">  
 				</div>
 				
 		
@@ -42,8 +42,6 @@
 			    <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="회원가입"></div>
 		 	</div>
 			
-					
-
 			</form>
 		</div>
 		<a class="btn btn-danger" href="index.jsp" role="button">뒤로 돌아가기</a>

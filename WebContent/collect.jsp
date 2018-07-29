@@ -36,31 +36,33 @@
  	<div class='row'>
  	<div class='col-sm-6'>
 	 <br>
-	 <h3 style="text-align: center:"> 네모 추가하기 </h3> <hr> 
+	 <h3 style="text-align: center:"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 네모 추가하기 </h3> <hr> 
 	 
 	 	<div class="container"  style="display: inline-block; text-align: center;">
 			<form method="post" action="joinAction.jsp">
+			
+				<!-- SELECT HTML을 이용해서 출발할 시/도를 선택하게 하기  
+				     - 출발 기차역을 정할 수 있게한다. 
+				-->
+				 
+				<!-- SELECT HTML을 이용해서 도착할 시/도를 선택하게 하기  
+					 - 도착 기차역을 정할 수 있게한다. 
+				-->
+				
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="30">  
+					<input type="text" class="form-control" placeholder="출발일을 입력해주세요(ex. 20180701)" name="day" maxlength="8">  
 				</div> 
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="30">  
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호 확인" name="userPassword1" maxlength="30">  
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="학번" name="studentNumber" maxlength="30">
-				</div>
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="핸드폰번호" name="phoneNumber" maxlength="30">  
-				</div>
+				
+				
+				<!-- 
+				
+				 -->
 				
 		
 		    <div class="row">
 			    <div class="col-sm-2"></div>
 			    <div class="col-sm-8"></div>
-			    <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="회원가입"></div>
+			    <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="등록하기"></div>
 		 	</div>
 			
 			</form>
