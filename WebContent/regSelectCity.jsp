@@ -11,13 +11,35 @@
 <body>
 
  <div class="container">
-	 <div class="container"  style="display: inline-block;text-align: center;">
-	 <h3> 출발하려는 도시를 선택해주세요</h3>
-	 <hr>
+	 <div class="container"  style="display: inline-block;text-align: center;"><br>
+	 <h4> 출발하려는 도시를 선택해주세요</h4>
+	 
        <form method="post" action="city">
 		<select name="city">
 			<option value="11" selected="selected"> 서울특별시 </option>
 			<option value="12"> 세종특별시 </option>
+			<option value="21"> 부산광역시 </option>
+			<option value="22"> 대구광역시 </option>
+			<option value="23"> 인천광역시 </option>
+			<option value="24"> 광주광역시 </option>
+			<option value="25"> 대전광역시 </option>
+			<option value="26"> 울산광역시 </option>
+			<option value="31"> 경기도 </option>
+			<option value="32"> 강원도 </option>
+			<option value="33"> 충청북도 </option>
+			<option value="34"> 충청남도 </option>
+			<option value="35"> 전라북도 </option>
+			<option value="36"> 전라남도 </option>
+			<option value="37"> 경상북도 </option>
+			<option value="38"> 경상남도 </option>
+		</select>
+	 
+	 <hr>
+	 <h4> 도착하려는 도시를 선택해주세요</h4>
+	 <br>
+		<select name="city2">
+			<option value="11"> 서울특별시 </option>
+			<option value="12"  selected="selected"> 세종특별시 </option>
 			<option value="21"> 부산광역시 </option>
 			<option value="22"> 대구광역시 </option>
 			<option value="23"> 인천광역시 </option>
