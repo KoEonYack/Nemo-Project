@@ -100,7 +100,7 @@ public class trainApiCity extends HttpServlet {
 		for(int j=0; j<testList2.size();j++ ) {
 			HashMap<String, Object> test2 = testList2.get(j);
 			System.out.println("here2 : " + test2);
-			writer.println("<option value=" + "\"test2.get('nodeid')\">"  + test2.get("nodename") + "</option>");
+			writer.println("<option value=" + "\""+ test2.get("nodeid") + "\">"  + test2.get("nodename") + "</option>");
 			// writer.println("start2 " + test2.get("nodename") + " " + test2.get("nodeid")  + "<br>");
 		}
 		writer.println("</select>");
@@ -109,6 +109,9 @@ public class trainApiCity extends HttpServlet {
 			"<div class=\"form-group\">\r\n" + 
 			"<input type=\"text\" class=\"form-control\" placeholder=\"출발 날짜를 입력해주세요(ex. 20180701)\" name=\"startDay\" maxlength=\"8\">  \r\n" + 
 			"</div> ");
+		
+		writer.println("<input type=\"hidden\" name=\"startCityCode\" value=\" " + city +">");
+		writer.println("<input type=\"hidden\" name=\"endCityCode\" value=\" " + city2 +">");
 		
 		writer.println("<br>");
 		

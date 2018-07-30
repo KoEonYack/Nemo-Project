@@ -17,6 +17,7 @@
     <servlet-name>trainApiCity</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>ApiStation</servlet-name>
     <servlet-class>nemo_project_root.ApiStation</servlet-class>
@@ -25,4 +26,5 @@
     <servlet-name>ApiStation</servlet-name>
     <url-pattern>/Station</url-pattern>
   </servlet-mapping>
+  
 </web-app>
