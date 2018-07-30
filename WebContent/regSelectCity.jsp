@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html">
+<%@ page contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<title> 네모(넷에 모여 KTX 할인받자)</title>
 </head>
 
 <body>
-
- <div class="container">
+ 
 	 <div class="container"  style="display: inline-block;text-align: center;"><br>
 	 <h4> 출발하려는 도시를 선택해주세요</h4>
 	 
-       <form method="post" action="city">
+       <form method="post" action="uft_trainApiCity">
 		<select name="city">
-			<option value="11" selected="selected"> 서울특별시 </option>
+			<option value="11,서울특별시" selected="selected"> 서울특별시 </option>
 			<option value="12"> 세종특별시 </option>
 			<option value="21"> 부산광역시 </option>
 			<option value="22"> 대구광역시 </option>
@@ -39,14 +39,14 @@
 	 <br>
 		<select name="city2">
 			<option value="11"> 서울특별시 </option>
-			<option value="12"  selected="selected"> 세종특별시 </option>
+			<option value="12"> 세종특별시 </option>
 			<option value="21"> 부산광역시 </option>
 			<option value="22"> 대구광역시 </option>
 			<option value="23"> 인천광역시 </option>
 			<option value="24"> 광주광역시 </option>
 			<option value="25"> 대전광역시 </option>
 			<option value="26"> 울산광역시 </option>
-			<option value="31"> 경기도 </option>
+			<option value="31,경기도" selected="selected"> 경기도 </option>
 			<option value="32"> 강원도 </option>
 			<option value="33"> 충청북도 </option>
 			<option value="34"> 충청남도 </option>
@@ -64,7 +64,6 @@
        </form>
 		
 	</div>
- </div>
 
 </body>
 </html>

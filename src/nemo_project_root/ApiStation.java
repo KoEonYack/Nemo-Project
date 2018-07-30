@@ -40,12 +40,17 @@ public class ApiStation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// doGet(request, response);
 		System.out.println("[Second Step]do Post implemented at ApiStation class");
+		response.setContentType("text/html; charset=EUC-KR");
 		
 		String startStation = request.getParameter("startStation"); // 출발하는 역
 		String endStation = request.getParameter("endStation"); // 도착하는 역
 		String date = request.getParameter("startDay");
+		String startCityCode = request.getParameter("startCityCode");
+		// 한글 테스트
 		
-		response.setContentType("text/html; charset=EUC-KR");
+		System.out.println("한글 startCityCode" + startCityCode);
+		
+		
 		PrintWriter writer = response.getWriter();
 		
 		HttpSession session = request.getSession();

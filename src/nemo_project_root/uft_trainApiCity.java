@@ -14,25 +14,26 @@ import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- * Servlet implementation class trainApiCity
+ * Servlet implementation class uft_trainApiCity
  */
-// @WebServlet("/city")
-public class trainApiCity extends HttpServlet {
+@WebServlet("/uft_trainApiCity")
+public class uft_trainApiCity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public trainApiCity() {
-        super();	
+    public uft_trainApiCity() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setCharacterEncoding("UTF-8"); 
 	}
 
 	/**
@@ -41,14 +42,8 @@ public class trainApiCity extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// doGet(request, response);
 		System.out.println("Success implement doPost - start and arrive location");
+		request.setCharacterEncoding("EUC-KR");
 		
-		response.setCharacterEncoding("UTF-8"); 
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html\">"
-				+ "<html><head>"
-				+ "<meta charset=\"UTF-8\">"
-				+ "</head><body>");					
 		// 변경 전
 		//String city = request.getParameter("city"); // 출발하는 도시 코드
 		//String city2 = request.getParameter("city2"); // 도착하는 도시 코드
@@ -59,11 +54,18 @@ public class trainApiCity extends HttpServlet {
 		String [] city = cityName.split(",");
 		String [] city2 = cityName2.split(",");
 		
+		response.setContentType("text/html; charset=EUC-KR");
+		
 		//response.setCharacterEncoding("UTF-8"); 
 		// response.setContentType("text/html; charset=UTF-8");
 		// response.setContentType("text/html; charset=EUC-KR");
 		// PrintWriter writer = response.getWriter();
 		
+		PrintWriter writer = response.getWriter();
+		writer.println("<!DOCTYPE html\">"
+				+ "<html><head>"
+				+ "<meta charset=\"UTF-8\">"
+				+ "</head><body>");			
 
 		// 변경 전
 		// writer.println("출발하는 도시 코드: " + city);
@@ -165,6 +167,9 @@ public class trainApiCity extends HttpServlet {
 				+ 	"</form>");
 		
 		writer.println("</body></html>");
+		
+		
+		
 	}
 
 }

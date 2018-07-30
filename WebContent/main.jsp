@@ -35,8 +35,6 @@
 <div class="container">
 <br><br>
     <div class="row">
-    
-    
         <div class="col-sm-3"></div>
         <div class="col-sm-6"> <h3> 출발 도시를 누르세요</h3><hr> </div>
         <div class="col-sm-3"></div>
