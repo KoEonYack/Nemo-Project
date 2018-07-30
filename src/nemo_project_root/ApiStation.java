@@ -90,9 +90,16 @@ public class ApiStation extends HttpServlet {
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i); //here
 			System.out.println("here : " + test);
-			writer.println("<option value=" + "\""+ test.get("arrplandtime") + "\">"  + test.get("depplandtime") + "</option>");
-		}
+			writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "출발~"  + test.get("arrplandtime") + "도착" + "</option>");
+		} // 여러개의 값을 보내려고 하면 파싱해서 보내면 된다.
 		writer.println("</select>");
+		
+		writer.println("	    <div class=\"row\">\r\n" + 
+				"		    <div class=\"col-sm-2\"></div>\r\n" + 
+				"		    <div class=\"col-sm-8\"></div>\r\n" + 
+				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"역 결정\"></div>\r\n" + 
+				"	 	</div>"
+				+ 	"</form>");
 		writer.println("</body></html>");
 	}
 		
