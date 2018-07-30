@@ -40,15 +40,15 @@ public class trainApiCity extends HttpServlet {
 		// doGet(request, response);
 		System.out.println("Success implement doPost - start and arrive location");
 		
-		String city = request.getParameter("city"); // ½ÃÀÛÇÏ´Â µµ½Ã
-		String city2 = request.getParameter("city2"); // µµÂøÇÏ´Â µµ½Ã
+		String city = request.getParameter("city"); // ì¶œë°œí•˜ëŠ” ë„ì‹œ ì½”ë“œ
+		String city2 = request.getParameter("city2"); // ë„ì°©í•˜ëŠ” ë„ì‹œ ì½”ë“œ
 		
 		response.setContentType("text/html; charset=EUC-KR");
 		PrintWriter writer = response.getWriter();
 		
 		writer.println("<html><head></head><body>");
-		writer.println("µµ½Ã1: " + city);
-		writer.println("µµ½Ã2: " + city2);
+		writer.println("ì¶œë°œí•˜ëŠ” ë„ì‹œ ì½”ë“œ: " + city);
+		writer.println("ë„ì°©í•˜ëŠ” ë„ì‹œ ì½”ë“œ: " + city2);
 		
 		Test t = new Test();
 		Test t2 = new Test();
@@ -84,8 +84,8 @@ public class trainApiCity extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// Ãâ¹ß, µµÂø¿ª, µµÂø ³¯Â¥¸¦ ¼±ÅÃÇÏ´Â HTMLºÎºĞ
-		writer.println("<h4>Ãâ¹ßÇÏ·Á´Â ¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä</h4><hr>");
+		// 
+		writer.println("<h4>ì¶œë°œí•˜ë ¤ëŠ” ë„ì‹œë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”</h4><hr>");
 		writer.println("<form method='post' action='Station'>");
 		writer.println("<select name=\"startStation\">");
 		for(int i=0; i<testList.size(); i++) {
@@ -95,7 +95,7 @@ public class trainApiCity extends HttpServlet {
 		}
 		writer.println("</select>");
 		
-		writer.println("<h4>µµÂøÇÏ·Á´Â ¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä</h4><hr>");
+		writer.println("<h4>ë„ì°©í•˜ë ¤ëŠ” ë„ì‹œë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”</h4><hr>");
 		writer.println("<select name=\"endStation\">");
 		for(int j=0; j<testList2.size();j++ ) {
 			HashMap<String, Object> test2 = testList2.get(j);
@@ -107,7 +107,7 @@ public class trainApiCity extends HttpServlet {
 		
 		writer.println(
 			"<div class=\"form-group\">\r\n" + 
-			"<input type=\"text\" class=\"form-control\" placeholder=\"Ãâ¹ß ³¯Â¥¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä(ex. 20180701)\" name=\"startDay\" maxlength=\"8\">  \r\n" + 
+			"<input type=\"text\" class=\"form-control\" placeholder=\"ì¶œë°œ ë‚ ì§œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”(ex 20180701)\" name=\"startDay\" maxlength=\"8\">  \r\n" + 
 			"</div> ");
 		
 		writer.println("<input type=\"hidden\" name=\"startCityCode\" value=\" " + city +">");
@@ -118,7 +118,7 @@ public class trainApiCity extends HttpServlet {
 		writer.println("	    <div class=\"row\">\r\n" + 
 				"		    <div class=\"col-sm-2\"></div>\r\n" + 
 				"		    <div class=\"col-sm-8\"></div>\r\n" + 
-				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"¿ª °áÁ¤\"></div>\r\n" + 
+				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"ë„ì‹œ ê²°ì •\"></div>\r\n" + 
 				"	 	</div>"
 				+ 	"</form>");
 		

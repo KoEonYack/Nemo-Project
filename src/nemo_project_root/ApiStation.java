@@ -40,21 +40,21 @@ public class ApiStation extends HttpServlet {
 		// doGet(request, response);
 		System.out.println("[Second Step]do Post implemented at ApiStation class");
 		
-		String startStation = request.getParameter("startStation"); // ½ÃÀÛÇÏ´Â µµ½Ã
-		String endStation = request.getParameter("endStation"); // µµÂøÇÏ´Â µµ½Ã
+		String startStation = request.getParameter("startStation"); // ì¶œë°œí•˜ëŠ” ì—­
+		String endStation = request.getParameter("endStation"); // ë„ì°©í•˜ëŠ” ì—­
 		String date = request.getParameter("startDay");
 		
 		response.setContentType("text/html; charset=EUC-KR");
 		PrintWriter writer = response.getWriter();
 		
 		writer.println("<html><head></head><body>");
-		writer.println("½ÃÀÛ¿ª: " + startStation);
-		writer.println("µµÂø¿ª: " + endStation);
-		writer.println("µµÂøÀÏ: " + date);
+		writer.println("ì¶œë°œí•˜ëŠ” ì—­: " + startStation);
+		writer.println("ë„ì°©í•˜ëŠ” ì—­: " + endStation);
+		writer.println("ì¶œë°œí•˜ëŠ” ë‚ : " + date);
 		
 		Test t = new Test();
 		
-		// xmlÀ» Ãâ·Â±â À§ÇØ¼­ url °ª º¯°æ
+		// xmlì„ ì¶œë ¥í•˜ê¸° ìœ„í•œ URLì„¤ì •
 		t.setDepPlaceId(startStation);
 		t.setArrPlaceId(endStation);
 		t.setDepPlandTime(date);
@@ -69,8 +69,8 @@ public class ApiStation extends HttpServlet {
 		System.out.println("======[xml test]=====");
 		System.out.println(xml);
 		
-		// µ¥ÀÌÅÍ¸¦ ÆÄ½ÌÇÏ±â À§ÇØ¼­  url °ª º¯°æÇÑ´Ù. 
-		Parser placeParser = new Parser(); // ParserÀÇ »õ·Î¿î ¹öÀü 
+		// URLì„ ì¶œë ¥í•˜ê¸° ìœ„í•œ setter
+		Parser placeParser = new Parser(); // ìƒˆë¡œìš´ parser
 		placeParser.setDepPlaceId(startStation);
 		placeParser.setArrPlaceId(endStation);
 		placeParser.setDepPlandTime(date);
@@ -83,21 +83,20 @@ public class ApiStation extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// Ãâ¹ß, µµÂø¿ª, µµÂø ³¯Â¥¸¦ ¼±ÅÃÇÏ´Â HTMLºÎºĞ
-		writer.println("<h4>Ãâ¹ßÇÏ·Á´Â ¿ªÀ» ¼±ÅÃÇØÁÖ¼¼¿ä</h4><hr>");
+		writer.println("<h4>ì›í•˜ëŠ” KTX ì‹œê°„ì„ ì„¤ì •í•´ì£¼ì„¸ìš”</h4><hr>");
 		writer.println("<form method='post' action='Station'>");
 		writer.println("<select name=\"startStation\">");
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i); //here
 			System.out.println("here : " + test);
-			writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "Ãâ¹ß~"  + test.get("arrplandtime") + "µµÂø" + "</option>");
-		} // ¿©·¯°³ÀÇ °ªÀ» º¸³»·Á°í ÇÏ¸é ÆÄ½ÌÇØ¼­ º¸³»¸é µÈ´Ù.
+			writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "ì¶œë°œ~"  + test.get("arrplandtime") + "ë„ì°©" + "</option>");
+		} 
 		writer.println("</select>");
 		
 		writer.println("	    <div class=\"row\">\r\n" + 
 				"		    <div class=\"col-sm-2\"></div>\r\n" + 
 				"		    <div class=\"col-sm-8\"></div>\r\n" + 
-				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"¿ª °áÁ¤\"></div>\r\n" + 
+				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"ë°©ë§Œë“¤ê¸°\"></div>\r\n" + 
 				"	 	</div>"
 				+ 	"</form>");
 		writer.println("</body></html>");
