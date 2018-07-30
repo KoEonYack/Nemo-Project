@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
@@ -49,6 +50,10 @@ public class trainApiCity extends HttpServlet {
 		writer.println("<html><head></head><body>");
 		writer.println("출발하는 도시 코드: " + city);
 		writer.println("도착하는 도시 코드: " + city2);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("cityCode", city);
+		session.setAttribute("cityCode2", city2);
 		
 		Test t = new Test();
 		Test t2 = new Test();

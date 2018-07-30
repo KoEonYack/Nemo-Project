@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
@@ -47,10 +48,17 @@ public class ApiStation extends HttpServlet {
 		response.setContentType("text/html; charset=EUC-KR");
 		PrintWriter writer = response.getWriter();
 		
+		HttpSession session = request.getSession();
+		// Object obj = session.getAttribute("city");
+		String cityCode = (String)session.getAttribute("cityCode");
+		String cityCode2 = (String)session.getAttribute("cityCode2");
+		
 		writer.println("<html><head></head><body>");
-		writer.println("출발하는 역: " + startStation);
-		writer.println("도착하는 역: " + endStation);
-		writer.println("출발하는 날: " + date);
+		writer.println("출발하는 역: " + startStation + "<br>");
+		writer.println("도착하는 역: " + endStation + "<br>");
+		writer.println("출발하는 날: " + date + "<br>");
+		writer.println("[세션]출발 도시 코드: " + cityCode + "<br>");
+		writer.println("[세션]도착 도시 코드: " + cityCode2);
 		
 		Test t = new Test();
 		
