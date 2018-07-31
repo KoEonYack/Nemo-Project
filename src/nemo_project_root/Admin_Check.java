@@ -1,10 +1,9 @@
-import java.sql.Connection;
+package nemo_project_root;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
-
+import java.sql.Connection;
 
 public class Admin_Check {
 	private Connection conn;
