@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% if(session.getAttribute("ValidMem") != null) { %>
+	<jsp:forward page="main.jsp"></jsp:forward>
+<% } %>
 <!DOCTYPE html">
 <html>
 <head>
@@ -21,9 +24,9 @@
        <div class="col-sm-4"></div>
        <div class="col-sm-4">
        
-       <form method="post" action="joinAction.jsp">
+       <form method="post" action="loginOK.jsp">
 		<div class="form-group">
-		<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="30">  
+		<input type="text" class="form-control" placeholder="아이디" name="useID" maxlength="30" value="<% if(session.getAttribute("id") != null) out.println(session.getAttribute("id")); %>">  
 		</div> 
 		<div class="form-group">
 		<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="30">  
@@ -31,7 +34,7 @@
 		
 		</div>
 		<div class="col-sm-2"> </div>
-       </form>
+       
 		
     </div>
     
@@ -40,6 +43,8 @@
     <div class="col-sm-4">
     
     <input type="submit" class="btn btn-primary form-control" value="로그인"/>
+    </form>
+    
     <br><br>
     <a href="register.jsp">아직 회원이 아니라고요? 지금 네모에 가입하세요!</a>
     </div>
@@ -51,3 +56,6 @@
 <br><br>
 </body>
 </html>
+
+
+

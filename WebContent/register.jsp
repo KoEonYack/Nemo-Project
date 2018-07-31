@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<title> 네모(넷에 모여 KTX 할인받자)</title>
+
 </head>
 
 <body>
