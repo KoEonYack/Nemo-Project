@@ -16,6 +16,9 @@ public class MemberDao {
 	public static final int MEMBER_LOGIN_SUCCESS = 1;
 	public static final int MEMBER_LOGIN_IS_NOT = -1;
 	
+	private Connection conn;
+	
+	
 	private static MemberDao instance = new MemberDao();
 	
 	private MemberDao() {
@@ -35,12 +38,11 @@ public class MemberDao {
 		try {
 			connection = getConnection();
 			pstmt = connection.prepareStatement(query);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getPw());
-			//pstmt.setString(3, dto.getPw2());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getStudentnumber());
-			pstmt.setString(5, dto.getPhonenumber());
+			pstmt.setString(1, dto.getUserID());
+			pstmt.setString(2, dto.getUserName());
+			pstmt.setString(3, dto.getUserPassword());
+			pstmt.setString(4, dto.getStudentNumber());
+			pstmt.setString(5, dto.getPhoneNumber());
 			pstmt.executeUpdate();
 			ri = MemberDao.MEMBER_JOIN_SUCCESS;
 		} catch (Exception e) {
@@ -112,12 +114,12 @@ public class MemberDao {
 			
 			if(set.next()) {
 				dto = new MemberDto();
-				dto.setId(set.getString("id"));
-				dto.setPw(set.getString("pw"));
+				dto.setUserID(set.getString("id"));
+				dto.setUserPassword(set.getString("pw"));
 				//dto.setPw2(set.getString("pw2"));
-				dto.setName(set.getString("name"));
-				dto.setStudentnumber(set.getString("studentnumber"));
-				dto.setPhonenumber(set.getString("phonenumber"));
+				dto.setUserName(set.getString("name"));
+				dto.setStudentNumber(set.getString("studentnumber"));
+				dto.setPhoneNumber(set.getString("phonenumber"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,18 +139,34 @@ public class MemberDao {
 	
 	private Connection getConnection() {
 		
+		/*
 		Context context = null;
 		DataSource dataSource = null;
 		Connection connection = null;
+		
 		try {
 			context = new InitialContext();
-			dataSource = (DataSource)context.lookup("jdbc:mysql://localhost:3306/db");
+			dataSource = (DataSource)context.lookup("jdbc:mysql://localhost:3308/USER"); // 
 			connection = dataSource.getConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return connection;
+		*/
+	
+		try {
+			String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+			String dbID = "root";
+			String dbPassword = "1234";
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+			System.out.println("성공적으로 DB에 연결되었습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return conn;
 	}
 	
 }

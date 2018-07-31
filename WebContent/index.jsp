@@ -34,14 +34,10 @@
 		
 		</div>
 		<div class="col-sm-2"> </div>
-       
-		
     </div>
-    
     <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-    
     <input type="submit" class="btn btn-primary form-control" value="로그인"/>
     </form>
     

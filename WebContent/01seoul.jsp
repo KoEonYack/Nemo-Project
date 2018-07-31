@@ -30,7 +30,6 @@
 
 
 
-
 <div class="container">
     <div class="row">
 		<h2>서울에서 출발하는 네모입니다.</h2>
