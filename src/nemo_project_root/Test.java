@@ -32,7 +32,7 @@ public class Test {
 		String serviceKey ="serviceKey=m4KM1T%2BEowdd34qwVcuNf8XXA%2FtWRVay0Dym8myQhHM9AkfxDvl%2FwJlrXgTdsin7c64gVp94noNG4CdMnYzaag%3D%3D&";
 		String parameter = "";
 	
-		parameter = parameter + "&" + "cityCode=" + cityCode;
+		parameter = parameter + "cityCode=" + cityCode;
 		// parameter = parameter + "&" + "pageNo=1";
 		// parameter = parameter + "&" + "MobileOS=ETC";
 		// parameter = parameter + "&" + "MobileApp=Apptesting";
@@ -57,7 +57,7 @@ public class Test {
 		String serviceKey ="serviceKey=m4KM1T%2BEowdd34qwVcuNf8XXA%2FtWRVay0Dym8myQhHM9AkfxDvl%2FwJlrXgTdsin7c64gVp94noNG4CdMnYzaag%3D%3D&";
 		String parameter = "";
 		
-		parameter = parameter + "&" + "numOfRows=150";
+		parameter = parameter + "numOfRows=150";
 		parameter = parameter + "&" + "pageSize=100";
 		parameter = parameter + "&" + "pageNo=1";
 		parameter = parameter + "&" + "StartPage=1";

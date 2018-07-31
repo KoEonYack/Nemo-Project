@@ -62,9 +62,8 @@ public class uft_trainApiCity extends HttpServlet {
 		// PrintWriter writer = response.getWriter();
 		
 		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html\">"
+		writer.println("<!DOCTYPE html>"
 				+ "<html><head>"
-				+ "<meta charset=\"UTF-8\">"
 				+ "</head><body>");			
 
 		// 변경 전
@@ -75,12 +74,12 @@ public class uft_trainApiCity extends HttpServlet {
 		System.out.println("그냥 한글을 쳐보자");
 		System.out.println("cityName" + cityName);
 		System.out.println(city[0] + " " + city[1]);
-		writer.println("출발하는 도시 코드: " + city[1]);
-		writer.println("도착하는 도시 코드: " + city2[1]);
+		writer.println("출발하는 도시 코드: " + city[0]);
+		writer.println("도착하는 도시 코드: " + city2[0]);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("cityCode", city[1]);
-		session.setAttribute("cityCode2", city2[1]);
+		session.setAttribute("cityCode", city[0]);
+		session.setAttribute("cityCode2", city2[0]);
 		
 		Test t = new Test();
 		Test t2 = new Test();

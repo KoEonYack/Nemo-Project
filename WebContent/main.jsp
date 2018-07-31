@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="#"> <button type="button" class="btn btn-default"><p>#01서울 11</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+   	      <a href="01seoul.jsp"> <button type="button" class="btn btn-default"><p>#01서울 11</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
           <a href="#"> <button type="button" class="btn btn-default"><p>#02세종 12</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
           <a href="#"> <button type="button" class="btn btn-default"><p>#03부산 21</p> <br> <p> 3 </p></button> </a>
         </div>

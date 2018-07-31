@@ -32,7 +32,6 @@ public class trainApiCity extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setCharacterEncoding("UTF-8"); 
 	}
 
 	/**
@@ -42,12 +41,11 @@ public class trainApiCity extends HttpServlet {
 		// doGet(request, response);
 		System.out.println("Success implement doPost - start and arrive location");
 		
-		response.setCharacterEncoding("UTF-8"); 
-		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("EUC-KR");
+		
 		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html\">"
+		writer.println("<!DOCTYPE html>"
 				+ "<html><head>"
-				+ "<meta charset=\"UTF-8\">"
 				+ "</head><body>");					
 		// 변경 전
 		//String city = request.getParameter("city"); // 출발하는 도시 코드
@@ -58,6 +56,8 @@ public class trainApiCity extends HttpServlet {
 		String cityName2 = request.getParameter("city2");
 		String [] city = cityName.split(",");
 		String [] city2 = cityName2.split(",");
+		
+		response.setContentType("text/html; charset=EUC-KR");
 		
 		//response.setCharacterEncoding("UTF-8"); 
 		// response.setContentType("text/html; charset=UTF-8");
