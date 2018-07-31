@@ -66,7 +66,7 @@ public class MemberDao {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
-		String query = "select pw from USER where id = ?";
+		String query = "SELECT userPassword FROM user WHERE userID = ?";
 		
 		try {
 			connection = getConnection();
@@ -75,11 +75,11 @@ public class MemberDao {
 			set = pstmt.executeQuery();
 			
 			if(set.next()) {
-				dbPw = set.getString("pw");
+				dbPw = set.getString("userPassword");
 				if(dbPw.equals(pw)) {
-					ri = MemberDao.MEMBER_LOGIN_SUCCESS;				// �α��� Ok
+					ri = MemberDao.MEMBER_LOGIN_SUCCESS;				// 로그인 성공 (1)
 				} else {
-					ri = MemberDao.MEMBER_LOGIN_PW_NO_GOOD;		// ��� X
+					ri = MemberDao.MEMBER_LOGIN_PW_NO_GOOD;		// 페스워드 플림
 				}
 			} else {
 				ri = MemberDao.MEMBER_LOGIN_IS_NOT;		// ȸ�� X	
@@ -99,11 +99,12 @@ public class MemberDao {
 		return ri;
 	}
 	
+	// 수정 필요, 세션에다가 저장하는 것이 더 좋아보임 
 	public MemberDto getMember(String id) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
-		String query = "select * from USER where id = ?";
+		String query = "select * from USER where userID = ?";
 		MemberDto dto = null;
 		
 		try {
@@ -114,12 +115,11 @@ public class MemberDao {
 			
 			if(set.next()) {
 				dto = new MemberDto();
-				dto.setUserID(set.getString("id"));
-				dto.setUserPassword(set.getString("pw"));
-				//dto.setPw2(set.getString("pw2"));
-				dto.setUserName(set.getString("name"));
-				dto.setStudentNumber(set.getString("studentnumber"));
-				dto.setPhoneNumber(set.getString("phonenumber"));
+				dto.setUserID(set.getString("userID"));
+				dto.setUserPassword(set.getString("userPassword"));
+				dto.setUserName(set.getString("userNames"));
+				dto.setStudentNumber(set.getString("studentNumber"));
+				dto.setPhoneNumber(set.getString("phoneNumber"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,7 +134,6 @@ public class MemberDao {
 		}
 		
 		return dto;
-		
 	}
 	
 	private Connection getConnection() {
