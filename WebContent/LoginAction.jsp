@@ -16,8 +16,6 @@
 	//check.login(user.getUserID(),user.getUserPassword());
 	result=1;
 	
-	
-	
 	if(result==1){
 		PrintWriter script=response.getWriter();
 		script.println("<script>");

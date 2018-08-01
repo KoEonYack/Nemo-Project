@@ -18,7 +18,6 @@ public class MemberDao {
 	
 	private Connection conn;
 	
-	
 	private static MemberDao instance = new MemberDao();
 	
 	private MemberDao() {

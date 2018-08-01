@@ -4,14 +4,6 @@ import java.sql.*;
 
 public class MemberDto {
 	
-	/*
-	private String id;
-	private String pw;
-	private String name;
-	private String studentnumber;
-	private String phonenumber;
-	*/
-	
 	private String userID;
 	private String userName;
 	private String userPassword;
@@ -48,49 +40,5 @@ public class MemberDto {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	/*
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
-
-
-	public String getStudentnumber() {
-		return studentnumber;
-	}
-
-	public void setStudentnumber(String studentnumber) {
-		this.studentnumber = studentnumber;
-	}
-
-
-	public String getPhonenumber() {
-		return phonenumber;
-	}
-
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
-	}
-	 */
 	
 }

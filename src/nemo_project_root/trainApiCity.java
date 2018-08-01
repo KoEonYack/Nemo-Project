@@ -71,7 +71,7 @@ public class trainApiCity extends HttpServlet {
 		// writer.println("도착하는 도시 코드: " + city2);
 		
 		// 변경 후
-		System.out.println("도시이름 출력 테스트: " + cityName);
+		System.out.println("출발 도시 이름 출력 테스트: " + cityName);
 		System.out.println(city[0] + " " + city[1]);
 		writer.println("출발하는 도시 코드: " + city[1]);
 		writer.println("도착하는 도시 코드: " + city2[1]);
@@ -127,7 +127,7 @@ public class trainApiCity extends HttpServlet {
 		}
 		
 		
-		writer.println("<h4>출발하려는 도시를 선택해 주세요</h4><hr>");
+		writer.println("<h4>출발하려는 역을 선택해 주세요</h4><hr>");
 		writer.println("<form method='post' action='Station'>");
 		writer.println("<select name=\"startStation\">");
 		for(int i=0; i<testList.size(); i++) {
@@ -137,7 +137,7 @@ public class trainApiCity extends HttpServlet {
 		}
 		writer.println("</select>");
 		
-		writer.println("<h4>도착하려는 도시를 선택해주세요</h4><hr>");
+		writer.println("<h4>도착하려는 역을 선택해주세요</h4><hr>");
 		writer.println("<select name=\"endStation\">");
 		for(int j=0; j<testList2.size();j++ ) {
 			HashMap<String, Object> test2 = testList2.get(j);

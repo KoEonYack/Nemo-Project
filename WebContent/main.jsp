@@ -26,19 +26,46 @@
     	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   네모하기</a></li>
     	<li><a href="logout.jsp">로그아웃</a></li>
      </ul>
-    </div>
-</nav>
+     </div>
+  	</nav>
+	
 
 
 
 
 <div class="container">
 <br><br>
+<<<<<<< HEAD
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6"> <h3> 출발 도시를 누르세요</h3><hr></div>
+=======
+<!-- 	
+   	
+     <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form></div>
+   -->
+   
+	  <div class="row">
+>>>>>>> 106f9dd07952b3cdc3862eef8eb36f932cd00b65
         <div class="col-sm-3"></div>
-    </div>
+        <div class="col-sm-3"> <h3> 출발 도시를 누르세요</h3><hr></div>
+        <div class="col-sm-3">
+        	
+        	<nav class="navbar  navbar-expand-sm  bg-dark  navbar-dark">
+ 	  		 <form class="form-inline" action="#">
+ 	  			 <input class="form-control" type="text" placeholder="Search">  
+  	 			 <button class="btn btn-success" type="submit">찾기</button>  
+ 			 </form> 
+     		 </nav>
+        </div>
+      	<div class="col-sm-3"></div> 
+     </div> 
+   
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">

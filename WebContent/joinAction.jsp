@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
+
 <%
 	MemberDao dao = MemberDao.getInstance();
 	PrintWriter script = response.getWriter();

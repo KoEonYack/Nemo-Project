@@ -63,6 +63,7 @@ public class ApiStation extends HttpServlet {
 		session.setAttribute("startStation", startStation);
 		session.setAttribute("endStation", endStation);
 		
+		
 		writer.println("<html><head></head><body>");
 		writer.println("출발하는 역: " + startStation + "<br>");
 		writer.println("도착하는 역: " + endStation + "<br>");
@@ -108,13 +109,14 @@ public class ApiStation extends HttpServlet {
 		}
 		
 		writer.println("<h4>원하는 KTX 시간을 설정해주세요</h4><hr>");
-		writer.println("<form method='post' action='Station'>");
-		writer.println("<select name=\"startStation\">");
+		writer.println("<form method='post' action='saveArticle'>");
+		writer.println("<select name=\"startAndEndTime\">");
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i); //here
-			System.out.println("here : " + test);
+			System.out.println("here : " + test.get("depplandtime") + "arrive: " + test.get("arrplandtime"));
 			writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "출발~"  + test.get("arrplandtime") + "도착" + "</option>");
-		} 
+		}
+		
 		writer.println("</select>");
 		
 		writer.println("	    <div class=\"row\">\r\n" + 
