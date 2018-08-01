@@ -60,7 +60,13 @@ public class saveArticle extends HttpServlet {
 		System.out.println("Debug startAndEndTime: " + startAndEndTime);
 		System.out.println("Debug date: " + date);
 		
-		String [] pTime = startAndEndTime.split("|"); // Parsing [1] Start Day  [2] End Day
+		// String [] pTime = startAndEndTime.split("|"); // Parsing [1] Start Day  [2] End Day
+		String pTime1 = startAndEndTime.substring(8, 14);
+		String pTime2 = startAndEndTime.substring(23, 29);
+		String pTime [] = { pTime1, pTime2};
+		
+		System.out.println("pTime[0]: " + pTime[0] + "pTime[1]: " + pTime[1] );
+		
 		
 		/*
 			DB에 넣어야한다.... 

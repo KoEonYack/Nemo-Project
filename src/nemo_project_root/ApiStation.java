@@ -46,12 +46,8 @@ public class ApiStation extends HttpServlet {
 		String startStation = request.getParameter("startStation"); // 출발하는 역
 		String endStation = request.getParameter("endStation"); // 도착하는 역
 		String date = request.getParameter("startDay");
-		String startCityCode = request.getParameter("startCityCode");
-		// 한글 테스트
-		
+
 		response.setContentType("text/html; charset=EUC-KR");
-		
-		System.out.println("한글 startCityCode" + startCityCode); // 여가서 코드가 깨짐
 		
 		PrintWriter writer = response.getWriter();
 		
@@ -60,17 +56,12 @@ public class ApiStation extends HttpServlet {
 		String cityCode = (String)session.getAttribute("StartCityName");
 		String cityCode2 = (String)session.getAttribute("EndCityName");
 		
-		session.setAttribute("startStation", startStation);
-		session.setAttribute("endStation", endStation);
-		
-		
 		writer.println("<html><head></head><body>");
 		writer.println("출발하는 역: " + startStation + "<br>");
 		writer.println("도착하는 역: " + endStation + "<br>");
 		writer.println("출발하는 날: " + date + "<br>");
 		writer.println("[세션]출발 도시 코드: " + cityCode + "<br>");
 		writer.println("[세션]도착 도시 코드: " + cityCode2);
-		
 		// 세션 - 시작역 
 		session.setAttribute("startStation", startStation);
 		session.setAttribute("endStation", endStation);
@@ -114,7 +105,10 @@ public class ApiStation extends HttpServlet {
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i); //here
 			System.out.println("here : " + test.get("depplandtime") + "arrive: " + test.get("arrplandtime"));
-			writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "출발~"  + test.get("arrplandtime") + "도착" + "</option>");
+			String sender = test.get("depplandtime") + "|" + test.get("arrplandtime");
+			System.out.println("ApiSation>sender 값, 파싱을 위해서 합친 문자열" + sender);
+			// writer.println("<option value=" + test.get("depplandtime") + "|" + test.get("arrplandtime") + "\">" + test.get("depplandtime")+ "출발~"  + test.get("arrplandtime") + "도착" + "</option>");
+			writer.println("<option value=" + sender + "\">" + test.get("depplandtime")+ "출발~"  + test.get("arrplandtime") + "도착" + "</option>");
 		}
 		
 		writer.println("</select>");
@@ -126,6 +120,7 @@ public class ApiStation extends HttpServlet {
 				"	 	</div>"
 				+ 	"</form>");
 		writer.println("</body></html>");
+
 	}
 		
 }

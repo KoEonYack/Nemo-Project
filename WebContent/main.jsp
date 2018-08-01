@@ -29,29 +29,23 @@
      </div>
   	</nav>
 	
-
-
-
-
 <div class="container">
 <br><br>
-<<<<<<< HEAD
+<!--   	
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6"> <h3> 출발 도시를 누르세요</h3><hr></div>
-=======
-<!-- 	
-   	
+
+
      <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form></div>
-   -->
+-->
    
 	  <div class="row">
->>>>>>> 106f9dd07952b3cdc3862eef8eb36f932cd00b65
         <div class="col-sm-3"></div>
         <div class="col-sm-3"> <h3> 출발 도시를 누르세요</h3><hr></div>
         <div class="col-sm-3">
@@ -134,7 +128,7 @@
         </div>
         <div class="col-sm-3"></div>
     </div>
-    
+    </div>
 </div>
 </body>
 </html>
