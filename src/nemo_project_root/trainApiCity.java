@@ -39,9 +39,10 @@ public class trainApiCity extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// doGet(request, response);
-		System.out.println("Success implement doPost - start and arrive location");
+		System.out.println("[Remove EUC - KR ]Success implement doPost - start and arrive location");
 		
 		request.setCharacterEncoding("EUC-KR");
+		response.setContentType("text/html; charset=EUC-KR");
 		
 		PrintWriter writer = response.getWriter();
 		writer.println("<!DOCTYPE html>"
@@ -70,24 +71,24 @@ public class trainApiCity extends HttpServlet {
 		// writer.println("도착하는 도시 코드: " + city2);
 		
 		// 변경 후
-		System.out.println("그냥 한글을 쳐보자");
-		System.out.println("cityName" + cityName);
+		System.out.println("도시이름 출력 테스트: " + cityName);
 		System.out.println(city[0] + " " + city[1]);
 		writer.println("출발하는 도시 코드: " + city[1]);
 		writer.println("도착하는 도시 코드: " + city2[1]);
 		
+		// 세션 설정
 		HttpSession session = request.getSession();
-		session.setAttribute("cityCode", city[1]);
-		session.setAttribute("cityCode2", city2[1]);
+		session.setAttribute("StartCityName", city[1]);
+		session.setAttribute("EndCityName", city2[1]);
 		
 		Test t = new Test();
 		Test t2 = new Test();
 		
-		// 변경 전
+		// 변경 전 - URL 설정
 		// t.setCityCode(city);
 		// t2.setCityCode(city2);
 		
-		// 변경 후
+		// 변경 후 - URL 설정
 		t.setCityCode(city[0]);
 		t2.setCityCode(city2[0]);
 		
@@ -125,13 +126,13 @@ public class trainApiCity extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		// 
-		writer.println("<h4>출발하려는 도시를 선택해주세요</h4><hr>");
+		
+		writer.println("<h4>출발하려는 도시를 선택해 주세요</h4><hr>");
 		writer.println("<form method='post' action='Station'>");
 		writer.println("<select name=\"startStation\">");
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i);
-			System.out.println("here : " + test);
+			System.out.println("도시들의 목록(Here) : " + test);
 			writer.println("<option value=" + "\""+ test.get("nodeid") + "\">"  + test.get("nodename") + "</option>");
 		}
 		writer.println("</select>");
@@ -140,7 +141,7 @@ public class trainApiCity extends HttpServlet {
 		writer.println("<select name=\"endStation\">");
 		for(int j=0; j<testList2.size();j++ ) {
 			HashMap<String, Object> test2 = testList2.get(j);
-			System.out.println("here2 : " + test2);
+			System.out.println("도시들의 목록(Here2): " + test2);
 			writer.println("<option value=" + "\""+ test2.get("nodeid") + "\">"  + test2.get("nodename") + "</option>");
 			// writer.println("start2 " + test2.get("nodename") + " " + test2.get("nodeid")  + "<br>");
 		}

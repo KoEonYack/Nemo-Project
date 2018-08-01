@@ -1,4 +1,6 @@
- <%@ page contentType="text/html; charset=euc-kr"%>
+ <%-- @ page contentType="text/html; charset=euc-kr"--%>
+ <%@ page language="java" contentType="text/html; charset=euc-kr" pageEncoding="euc-kr"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +15,7 @@
 	 <div class="container"  style="display: inline-block;text-align: center;"><br>
 	 <h4> 출발하려는 도시를 선택해주세요</h4>
 	 
-       <form method="post" action="city">
+       <form method="post" action="test_city">
 		<select name="city">
 			<option value="11,서울특별시" selected="selected"> 서울특별시 </option>
 			<option value="12"> 세종특별시 </option>

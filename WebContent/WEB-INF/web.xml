@@ -18,9 +18,8 @@
     <servlet-name>trainApiCity</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
+  
     <servlet-name>ApiStation</servlet-name>
     <servlet-class>nemo_project_root.ApiStation</servlet-class>
   </servlet>
@@ -29,24 +28,24 @@
     <url-pattern>/Station</url-pattern>
   </servlet-mapping>
   
-  
-    <servlet>
-    <servlet-name>utf_trainApiCity</servlet-name>
-    <servlet-class>nemo_project_root.utf_trainApiCity</servlet-class>
+  <servlet>
+    <servlet-name>test_trainApiCity</servlet-name>
+    <servlet-class>nemo_project_root.test_trainApiCity</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>utf_trainApiCity</servlet-name>
-    <url-pattern>/utf_city</url-pattern>
+    <servlet-name>test_trainApiCity</servlet-name>
+  <url-pattern>/test_city</url-pattern>
+  
   </servlet-mapping>
-  
   <error-page>
-  	<error-code>404</error-code>
-  		<location>/error404.jsp</location>
+    <error-code>404</error-code>
+    <location>/error404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error500.jsp</location>
   </error-page>
   
-  <error-page>
-  	<error-code>500</error-code>
-  		<location>/error500.jsp</location>
-  </error-page>
+  
   
 </web-app>

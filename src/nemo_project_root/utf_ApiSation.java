@@ -14,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- * Servlet implementation class ApiStation
+ * Servlet implementation class utf_ApiSation
  */
-// @WebServlet(name = "apiStation", urlPatterns = { "/Station" })
-public class ApiStation extends HttpServlet {
+//@WebServlet("/utf_ApiSation")
+public class utf_ApiSation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApiStation() {
+    public utf_ApiSation() {
         super();
     }
 
@@ -39,6 +39,7 @@ public class ApiStation extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// doGet(request, response);
+		
 		System.out.println("[Second Step]do Post implemented at ApiStation class");
 		
 		response.setContentType("text/html; charset=EUC-KR");
@@ -51,17 +52,16 @@ public class ApiStation extends HttpServlet {
 		
 		response.setContentType("text/html; charset=EUC-KR");
 		
-		System.out.println("한글 startCityCode" + startCityCode); // 여가서 코드가 깨짐
+		System.out.println("한글 startCityCode" + startCityCode);
+		
 		
 		PrintWriter writer = response.getWriter();
 		
-		// 세션 세팅
 		HttpSession session = request.getSession();
-		String cityCode = (String)session.getAttribute("StartCityName");
-		String cityCode2 = (String)session.getAttribute("EndCityName");
+		// Object obj = session.getAttribute("city");
+		String cityCode = (String)session.getAttribute("cityCode");
+		String cityCode2 = (String)session.getAttribute("cityCode2");
 		
-		session.setAttribute("startStation", startStation);
-		session.setAttribute("endStation", endStation);
 		
 		writer.println("<html><head></head><body>");
 		writer.println("출발하는 역: " + startStation + "<br>");
@@ -69,12 +69,6 @@ public class ApiStation extends HttpServlet {
 		writer.println("출발하는 날: " + date + "<br>");
 		writer.println("[세션]출발 도시 코드: " + cityCode + "<br>");
 		writer.println("[세션]도착 도시 코드: " + cityCode2);
-		
-		// 세션 - 시작역 
-		session.setAttribute("startStation", startStation);
-		session.setAttribute("endStation", endStation);
-		session.setAttribute("date", date);
-		System.out.println(startStation + " " + endStation + " " + date);
 		
 		Test t = new Test();
 		
@@ -124,6 +118,7 @@ public class ApiStation extends HttpServlet {
 				"	 	</div>"
 				+ 	"</form>");
 		writer.println("</body></html>");
-	}
-		
+			
+		}
+
 }

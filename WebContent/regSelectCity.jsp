@@ -1,8 +1,8 @@
- <%@ page contentType="text/html; charset=euc-kr"%>
+<%@ page language="java" contentType="text/html" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
+	<!-- meta charset="EUC-KR" -->
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<title> 네모(넷에 모여 KTX 할인받자)</title>
