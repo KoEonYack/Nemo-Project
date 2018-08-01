@@ -41,13 +41,25 @@ public class ApiStation extends HttpServlet {
 		// doGet(request, response);
 		System.out.println("[Second Step]do Post implemented at ApiStation class");
 		
+		request.setCharacterEncoding("EUC-KR");
 		response.setContentType("text/html; charset=EUC-KR");
+		
 		
 		String startStation = request.getParameter("startStation"); // 출발하는 역
 		String endStation = request.getParameter("endStation"); // 도착하는 역
 		String date = request.getParameter("startDay");
 
 		response.setContentType("text/html; charset=EUC-KR");
+		
+		
+        int idx = startStation.indexOf(","); 
+        String startSationCode = startStation.substring(0, idx);
+        String startStationName = startStation.substring(idx+1);
+		
+        idx = endStation.indexOf(","); 
+        String endSationCode = endStation.substring(0, idx);
+        String endStationName = endStation.substring(idx+1);
+		
 		
 		PrintWriter writer = response.getWriter();
 		
@@ -57,22 +69,28 @@ public class ApiStation extends HttpServlet {
 		String cityCode2 = (String)session.getAttribute("EndCityName");
 		
 		writer.println("<html><head></head><body>");
-		writer.println("출발하는 역: " + startStation + "<br>");
-		writer.println("도착하는 역: " + endStation + "<br>");
+		writer.println("출발하는 역 코드: " + startSationCode + "<br>");
+		writer.println("출발하는 역 이름: " + startStationName + "<br>");
+		writer.println("도착하는 역 코드: " + endSationCode + "<br>");
+		writer.println("도착하는 역 이름: " + endStationName + "<br>");
 		writer.println("출발하는 날: " + date + "<br>");
 		writer.println("[세션]출발 도시 코드: " + cityCode + "<br>");
 		writer.println("[세션]도착 도시 코드: " + cityCode2);
+		
+		
 		// 세션 - 시작역 
-		session.setAttribute("startStation", startStation);
-		session.setAttribute("endStation", endStation);
+		session.setAttribute("startSationCode", startSationCode);
+		session.setAttribute("startStationName", startStationName);
+		session.setAttribute("endSationCode", endSationCode);
+		session.setAttribute("endStationName", endStationName);
 		session.setAttribute("date", date);
-		System.out.println(startStation + " " + endStation + " " + date);
+		System.out.println(startSationCode + " " + endSationCode + " " + date);
 		
 		Test t = new Test();
 		
 		// xml을 출력하기 위한 URL설정
-		t.setDepPlaceId(startStation);
-		t.setArrPlaceId(endStation);
+		t.setDepPlaceId(startSationCode);
+		t.setArrPlaceId(endSationCode);
 		t.setDepPlandTime(date);
 		
 		String xml="";
@@ -87,8 +105,8 @@ public class ApiStation extends HttpServlet {
 		
 		// URL을 출력하기 위한 setter
 		Parser placeParser = new Parser(); // 새로운 parser
-		placeParser.setDepPlaceId(startStation);
-		placeParser.setArrPlaceId(endStation);
+		placeParser.setDepPlaceId(startSationCode);
+		placeParser.setArrPlaceId(endSationCode);
 		placeParser.setDepPlandTime(date);
 		
 		ArrayList<HashMap<String, Object>> testList = null; // here

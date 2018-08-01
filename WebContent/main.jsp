@@ -12,11 +12,7 @@
 <body>
 
 <nav class="navbar navbar-default">
-
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    
-  
     <div class="navbar-header">
       <div id="block1" > </div>
       <a href="main.jsp"><img src="data/gray_logo.jpg" height="25" width="auto"/> </a>
@@ -25,9 +21,9 @@
     <ul class="nav navbar-nav navbar-right">
     	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   네모하기</a></li>
     	<li><a href="logout.jsp">로그아웃</a></li>
-     </ul>
-     </div>
-  	</nav>
+    </ul>
+    </div>
+</nav>
 	
 <div class="container">
 <br><br>

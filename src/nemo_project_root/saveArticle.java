@@ -49,8 +49,10 @@ public class saveArticle extends HttpServlet {
 		String StartCityName = (String)session.getAttribute("StartCityName");
 		String EndCityName = (String)session.getAttribute("EndCityName");
 		String date = (String)session.getAttribute("date");
-		String startStation = (String)session.getAttribute("startStation");
-		String endStation = (String)session.getAttribute("endStation");
+		String startSationCode = (String)session.getAttribute("startSationCode"); // startStation
+		String startStationName = (String)session.getAttribute("startStationName");
+		String endSationCode = (String)session.getAttribute("endSationCode");
+		String endStationName = (String)session.getAttribute("endStationName");
 		String masterUserID = (String)session.getAttribute("masterUserID");
 		String masterUserName = (String)session.getAttribute("masterUserName");
 		String startAndEndTime =  request.getParameter("startAndEndTime"); 
@@ -75,7 +77,7 @@ public class saveArticle extends HttpServlet {
 		*/
 
 		ArticleDao dao = ArticleDao.getInstance();
-		int res = dao.insertArticle(StartCityName, EndCityName, startStation, endStation, pTime[0], pTime[1], date, masterUserID, masterUserName);
+		int res = dao.insertArticle(StartCityName, EndCityName, startStationName, endStationName, pTime[0], pTime[1], date, masterUserID, masterUserName);
 		// String sql = "INSERT INTO board1 (startCity, endCity, startStation, endSatation, startTime, endTime, startDay, masterUserID, masterUserName) VALUES(?,?,?,?)"; 
 		if(res > 0) {
 			script.println("<script>");

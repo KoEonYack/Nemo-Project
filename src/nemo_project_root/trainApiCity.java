@@ -133,7 +133,7 @@ public class trainApiCity extends HttpServlet {
 		for(int i=0; i<testList.size(); i++) {
 			HashMap<String, Object> test = testList.get(i);
 			System.out.println("도시들의 목록(Here) : " + test);
-			writer.println("<option value=" + "\""+ test.get("nodeid") + "\">"  + test.get("nodename") + "</option>");
+			writer.println("<option value=" + "\""+ test.get("nodeid") + "," + test.get("nodename") + "\">"  + test.get("nodename") + "</option>");
 		}
 		writer.println("</select>");
 		
@@ -142,7 +142,7 @@ public class trainApiCity extends HttpServlet {
 		for(int j=0; j<testList2.size();j++ ) {
 			HashMap<String, Object> test2 = testList2.get(j);
 			System.out.println("도시들의 목록(Here2): " + test2);
-			writer.println("<option value=" + "\""+ test2.get("nodeid") + "\">"  + test2.get("nodename") + "</option>");
+			writer.println("<option value=" + "\""+ test2.get("nodeid") + "," + test2.get("nodename") + "\">"  + test2.get("nodename") + "</option>");
 			// writer.println("start2 " + test2.get("nodename") + " " + test2.get("nodeid")  + "<br>");
 		}
 		writer.println("</select>");
