@@ -3,14 +3,30 @@
 <html>
 <head>
 	<!-- meta charset="EUC-KR" -->
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR"> <!-- 이 부분 추가함 -->
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="css/custom.css">
 	<title> 네모(넷에 모여 KTX 할인받자)</title>
 </head>
 
 <body>
- 
-	 <div class="container"  style="display: inline-block;text-align: center;"><br>
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <div id="block1" > </div>
+      <a href="main.jsp"><img src="data/gray_logo.jpg" height="25" width="auto"/> </a>
+      <div id="block1" > </div>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   네모하기</a></li>
+    	<li><a href="logout.jsp">로그아웃</a></li>
+    </ul>
+    </div>
+</nav>
+
+<div class="container">
+	 <div class="container"  style="display: inline-block; text-align: center;"><br>
 	 <h4> 출발하려는 도시를 선택해주세요</h4>
 	 
        <form method="post" action="city">
@@ -63,6 +79,6 @@
        </form>
 		
 	</div>
-
+</div>
 </body>
 </html>

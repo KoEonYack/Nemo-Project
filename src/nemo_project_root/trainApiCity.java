@@ -45,9 +45,29 @@ public class trainApiCity extends HttpServlet {
 		response.setContentType("text/html; charset=EUC-KR");
 		
 		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html>"
-				+ "<html><head>"
-				+ "</head><body>");					
+		writer.println("<html><head>	"
+				+ "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n" + 
+				"	<meta name=\"viewport\" content=\"width-device-width\", initial-scale=\"1\">\r\n" + 
+				"	<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css\"> \r\n" + 
+				"	<link rel=\"stylesheet\" href=\"css/custom.css\">\r\n" + 
+				"	<title> 네모(넷에 모여 KTX 할인받자)</title></head><body>");
+		
+		writer.println(
+				"<nav class=\"navbar navbar-default\">\r\n" + 
+				"  <div class=\"container-fluid\">\r\n" + 
+				"    <div class=\"navbar-header\">\r\n" + 
+				"      <div id=\"block1\" style=\"margin: 12px;\" > </div>\r\n" + 
+				"      <a href=\"main.jsp\"><img src=\"data/gray_logo.jpg\" height=\"25\" width=\"auto\"/> </a>\r\n" + 
+				"      <div id=\"block1\" > </div>\r\n" + 
+				"    </div>\r\n" + 
+				"    <ul class=\"nav navbar-nav navbar-right\">\r\n" + 
+				"    	<li><a href=\"regSelectCity.jsp\">  <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>   네모하기</a></li>\r\n" + 
+				"    	<li><a href=\"logout.jsp\">로그아웃</a></li>\r\n" + 
+				"    </ul>\r\n" + 
+				"    </div>\r\n" + 
+				"</nav><br><br>");
+		
+		writer.println("<div class=\"container\"");
 		// 변경 전
 		//String city = request.getParameter("city"); // 출발하는 도시 코드
 		//String city2 = request.getParameter("city2"); // 도착하는 도시 코드
@@ -127,7 +147,9 @@ public class trainApiCity extends HttpServlet {
 		}
 		
 		
-		writer.println("<h4>출발하려는 역을 선택해 주세요</h4><hr>");
+		writer.println("<h4>"
+				+ "출발하려는 역을 선택해 주세요 </h4>"
+				+ "<hr>");
 		writer.println("<form method='post' action='Station'>");
 		writer.println("<select name=\"startStation\">");
 		for(int i=0; i<testList.size(); i++) {
@@ -135,7 +157,8 @@ public class trainApiCity extends HttpServlet {
 			System.out.println("도시들의 목록(Here) : " + test);
 			writer.println("<option value=" + "\""+ test.get("nodeid") + "," + test.get("nodename") + "\">"  + test.get("nodename") + "</option>");
 		}
-		writer.println("</select>");
+		writer.println("</select>"
+				+ "<br>");
 		
 		writer.println("<h4>도착하려는 역을 선택해주세요</h4><hr>");
 		writer.println("<select name=\"endStation\">");
@@ -145,7 +168,8 @@ public class trainApiCity extends HttpServlet {
 			writer.println("<option value=" + "\""+ test2.get("nodeid") + "," + test2.get("nodename") + "\">"  + test2.get("nodename") + "</option>");
 			// writer.println("start2 " + test2.get("nodename") + " " + test2.get("nodeid")  + "<br>");
 		}
-		writer.println("</select>");
+		writer.println("</select>"
+				+ "<br>");
 		
 		writer.println(
 			"<div class=\"form-group\">\r\n" + 
@@ -164,8 +188,7 @@ public class trainApiCity extends HttpServlet {
 				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"도시 결정\"></div>\r\n" + 
 				"	 	</div>"
 				+ 	"</form>");
-		
+		writer.println("</div>");
 		writer.println("</body></html>");
 	}
-
 }

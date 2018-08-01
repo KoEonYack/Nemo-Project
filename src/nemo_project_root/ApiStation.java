@@ -63,12 +63,35 @@ public class ApiStation extends HttpServlet {
 		
 		PrintWriter writer = response.getWriter();
 		
+		
 		// 세션 세팅
 		HttpSession session = request.getSession();
 		String cityCode = (String)session.getAttribute("StartCityName");
 		String cityCode2 = (String)session.getAttribute("EndCityName");
 		
-		writer.println("<html><head></head><body>");
+		writer.println("<html><head>	"
+				+ "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n" + 
+				"	<meta name=\"viewport\" content=\"width-device-width\", initial-scale=\"1\">\r\n" + 
+				"	<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css\"> \r\n" + 
+				"	<link rel=\"stylesheet\" href=\"css/custom.css\">\r\n" + 
+				"	<title> 네모(넷에 모여 KTX 할인받자)</title></head><body>");
+		writer.println(
+				"<nav class=\"navbar navbar-default\">\r\n" + 
+				"  <div class=\"container-fluid\">\r\n" + 
+				"    <div class=\"navbar-header\">\r\n" + 
+				"      <div id=\"block1\" style=\"margin: 12px;\" > </div>\r\n" + 
+				"      <a href=\"main.jsp\"><img src=\"data/gray_logo.jpg\" height=\"25\" width=\"auto\"/> </a>\r\n" + 
+				"      <div id=\"block1\" > </div>\r\n" + 
+				"    </div>\r\n" + 
+				"    <ul class=\"nav navbar-nav navbar-right\">\r\n" + 
+				"    	<li><a href=\"regSelectCity.jsp\">  <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>   네모하기</a></li>\r\n" + 
+				"    	<li><a href=\"logout.jsp\">로그아웃</a></li>\r\n" + 
+				"    </ul>\r\n" + 
+				"    </div>\r\n" + 
+				"</nav><br><br>");
+		writer.println("<div class=\"container\"");
+		
+		
 		writer.println("출발하는 역 코드: " + startSationCode + "<br>");
 		writer.println("출발하는 역 이름: " + startStationName + "<br>");
 		writer.println("도착하는 역 코드: " + endSationCode + "<br>");
@@ -137,6 +160,8 @@ public class ApiStation extends HttpServlet {
 				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"방만들기\"></div>\r\n" + 
 				"	 	</div>"
 				+ 	"</form>");
+		
+		writer.println("</div>");
 		writer.println("</body></html>");
 
 	}

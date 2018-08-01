@@ -63,7 +63,12 @@ public class utf_ApiSation extends HttpServlet {
 		String cityCode2 = (String)session.getAttribute("cityCode2");
 		
 		
-		writer.println("<html><head></head><body>");
+		writer.println("<html><head>	"
+				+ "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n" + 
+				"	<meta name=\"viewport\" content=\"width-device-width\", initial-scale=\"1\">\r\n" + 
+				"	<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css\"> \r\n" + 
+				"	<link rel=\"stylesheet\" href=\"css/custom.css\">\r\n" + 
+				"	<title> 네모(넷에 모여 KTX 할인받자)</title></head><body>");
 		writer.println("출발하는 역: " + startStation + "<br>");
 		writer.println("도착하는 역: " + endStation + "<br>");
 		writer.println("출발하는 날: " + date + "<br>");
@@ -111,7 +116,7 @@ public class utf_ApiSation extends HttpServlet {
 		} 
 		writer.println("</select>");
 		
-		writer.println("	    <div class=\"row\">\r\n" + 
+		writer.println("<div class=\"row\">\r\n" + 
 				"		    <div class=\"col-sm-2\"></div>\r\n" + 
 				"		    <div class=\"col-sm-8\"></div>\r\n" + 
 				"		    <div class=\"col-sm-2\"><input type=\"submit\" class=\"btn btn-primary form-control\" value=\"방만들기\"></div>\r\n" + 
