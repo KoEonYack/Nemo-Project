@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import= "java.io.PrintWriter" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +33,21 @@
 	 <h2>내가 들어간 네모 보기</h2>
 	 <hr>
  <%
- // EUC - KR 문제를 해결하자ㅣ/....
+  	// EUC - KR 문제를 해결하자ㅣ
+
+	PrintWriter script=response.getWriter();
+ 
+ 	String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
+	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
+
+	System.out.println("Session id: " + loginID + "\nSession name" + loginName);
+	if(session.getAttribute("userID") == null){
+		script.println("<script>");
+		script.println("alert('로그인해주세요!')");
+		script.println("location.href='index.jsp'");
+		script.println("</script>");
+	}
+ 
 	Statement stmt;
 	ResultSet rs;
 	try {
@@ -43,8 +58,9 @@
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
 
-		String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
-		String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
+		// 세션 때문에 지움
+		//String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
+		//String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 		
 		// String sqlList = "SELECT * FROM enterUserToArticle AS UTA, Article WHERE UTA.userID=" + loginID + "AND UTA.articleID=Article.articleID ORDER BY articleID DESC";
 		String sqlList ="SELECT * FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID AND  startDay > CURDATE()+0 ORDER BY AT.startDay DESC";

@@ -47,7 +47,7 @@
 			session.setAttribute("id", id);
 			session.setAttribute("name", name);
 			session.setAttribute("pw", pw);
-			System.out.println("技记 id: " + id + "\n技记 捞抚" + name + "\npw" + pw);
+			System.out.println("Session id: " + id + "\nSession name" + name + "\n Session pw" + pw);
 			response.sendRedirect("main.jsp");
 		}
 	}

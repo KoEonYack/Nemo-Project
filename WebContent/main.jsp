@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import= "java.io.PrintWriter" %>
 <!DOCTYPE html">
 <html>
 <head>
@@ -29,12 +30,24 @@
 	
 <div class="container">
  <%
+ 	PrintWriter script=response.getWriter();
+	String userID = null;
+	
 	Statement [] stmt = new Statement[17];
 	ResultSet [] rs = new ResultSet[17];
 	int [] total = new int [17];
 	
 	String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
 	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
+	
+	System.out.println("Session id: " + loginID + "\nSession name" + loginName);
+	if(session.getAttribute("userID") == null){
+		script.println("<script>");
+		script.println("alert('로그인해주세요!')");
+		script.println("location.href='index.jsp'");
+		script.println("</script>");
+	}
+	
 	
 	try {
 		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
@@ -47,23 +60,23 @@
 			stmt[i] = conn.createStatement();
 		}
 
-		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='서울특별시'";
-		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='세종특별시'"; 
-		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='부산광역시'"; 
-		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='대구광역시'";
-		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='인천광역시'";
-		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='광주광역시'"; 
-		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='대전광역시'";
-		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='울산광역시'";
-		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='경기도'";
-		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='강원도'";
-		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='충청북도'";
-		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='충청남도'";
-		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='전라북도'";
-		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='전라남도'";
-		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='경상북도'";
-		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='경상남도'";
-		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID";
+		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()+0";
+		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='세종특별시' AND startDay > CURDATE()+0"; 
+		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='부산광역시' AND startDay > CURDATE()+0"; 
+		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='대구광역시' AND startDay > CURDATE()+0";
+		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='인천광역시' AND startDay > CURDATE()+0";
+		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='광주광역시' AND startDay > CURDATE()+0"; 
+		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='대전광역시' AND startDay > CURDATE()+0";
+		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='울산광역시' AND startDay > CURDATE()+0";
+		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='경기도' AND startDay > CURDATE()+0";
+		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='강원도' AND startDay > CURDATE()+0";
+		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='충청북도' AND startDay > CURDATE()+0";
+		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='충청남도' AND startDay > CURDATE()+0";
+		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='전라북도' AND startDay > CURDATE()+0";
+		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='전라남도' AND startDay > CURDATE()+0";
+		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='경상북도' AND startDay > CURDATE()+0";
+		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='경상남도' AND startDay > CURDATE()+0";
+		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID  AND startDay > CURDATE()+0";
 		
 		rs[0] = stmt[0].executeQuery(c01);
 		rs[1] = stmt[1].executeQuery(c02);
