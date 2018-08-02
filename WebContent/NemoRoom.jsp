@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page import="java.sql.*" %>
+<%@page import="java.io.PrintWriter"%>
 <!DOCTYPE html">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset="EUC-KR">
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="css/custom.css">
-	<title> ë„¤ëª¨(ë„·ì— ëª¨ì—¬ KTX í• ì¸ë°›ì)</title>
+	<title> ³×¸ğ(³İ¿¡ ¸ğ¿© KTX ÇÒÀÎ¹ŞÀÚ)</title>
 </head>
 
 <body>
@@ -18,23 +20,123 @@
       <div id="block1" > </div>
     </div>
     <ul class="nav navbar-nav navbar-right">
-    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ë„¤ëª¨í•˜ê¸°</a></li>
-    	<li><a href="logout.jsp">ë¡œê·¸ì•„ì›ƒ</a></li>
+    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ³×¸ğÇÏ±â</a></li>
+    	<li><a href="logout.jsp">·Î±×¾Æ¿ô</a></li>
     </ul>
     </div>
 </nav>
 	
 <div class="container">
+ <%
+	Statement stmt;
+ 	Statement stmt2;
+ 	Statement stmt3;
+ 	Statement stmt4;
+ 	
+	ResultSet rs;
+	ResultSet rsCount;
+	ResultSet rsCheckInNemoSQL;
+	ResultSet rsShowUserTable;
 	
-	<h3>(ì—¬ê¸°ì— ì¶œë°œ/ë„ì°© í•˜ëŠ” ë„ì‹œ ì´ë¦„ì´ ë“¤ì–´ê°‘ë‹ˆë‹¤.)</h3>
-	<hr>
-	<h3>(ì—¬ê¸°ì— ì¶œë°œì—­/ë„ì°©ì—­/ì¶œë°œì‹œê°„/ë„ì°©ì‹œê°„/ ì´ ë“¤ì–´ê°‘ë‹ˆë‹¤.)</h3>
+	PreparedStatement pstmt;
+	
+	String id = "";
+	String pass = "";
+	// String inUserName = "";
+	
+	int totalMember = 0;
+	int isInNemo = 0; 
+	int articleID = Integer.parseInt(request.getParameter("articleID"));
+	PrintWriter script = response.getWriter();
+	
+	String loginID = (String)session.getAttribute("id"); // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ »ç¿ëÀÚÀÇ id¸¦ °¡Á®¿À±â
+	String loginName= (String)session.getAttribute("name"); // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ »ç¿ëÀÚÀÇ ÀÌ¸§À» °¡Á®¿À±â
+	
+	try {
+		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+		String dbID = "root";
+		String dbPassword = "1234";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+		stmt = conn.createStatement();
+		stmt2 = conn.createStatement();
+		stmt3 = conn.createStatement();
+		stmt4 = conn.createStatement();
+		String sql = "SELECT * FROM Article WHERE articleID=" + articleID; // ÇöÀç °Ô½Ã±ÛÀÇ ¸ğµç Á¤º¸¸¦ ºÒ·¯¿À´Â Äõ¸®
+		String userSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID; // º» ¹æ¿¡ µé¾î¿Â À¯ÀúÀÇ °³¼ı¸¦ ¼¼´Â Äõ¶ó¤Ó	
+		String checkInNemoSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID + " AND "+ "userID=" + loginID;
+		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // ³×¸ğ¿¡ °¡ÀÔÇÏ°Ô ¸¸µå´Â ±¸¹®
+		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
+		
+		pstmt = conn.prepareStatement(insertNemoSQL); // insert¸¦ À§ÇØ¼­ ¹Ì¸® ÁØºñÇÑ ±¸¹®ÀÌ´Ù. 
+		
+		rs = stmt.executeQuery(sql);
+		rsCount = stmt2.executeQuery(userSQL);
+		rsCheckInNemoSQL = stmt3.executeQuery(checkInNemoSQL);
+		rsShowUserTable = stmt4.executeQuery(showUserTable);
+		
+		
+		// String checkMasterUserID = rs.getString(9); // ÀÌ ºÎºĞÀ» ¼öÁ¤ÇØ¾ßÇÑ´Ù. rs.next()¸¦ ¾È¾²°í ÀÌ°ÍÀ» »ç¿ëÇÒ ¼ö ¾øÀ» °ÍÀÌ´Ù. 
+		
+		if(rsCount.next()){  // ¹æ¿¡ µé¾î¿Â À¯Àú ¼ö¸¦ »õ´Â ºÎºĞ
+			totalMember = rsCount.getInt(1); 
+		}
+		if(rsCheckInNemoSQL.next()){  // À¯Àú°¡ ¹æ¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ºÎºĞ
+			isInNemo = rsCheckInNemoSQL.getInt(1); 
+		}
+		/*
+		if(rsShowUserTable.next()){
+			inUserName = rsShowUserTable.getString(1); 
+		}
+		*/
+		
+		if(totalMember==3){ // 4¸íÀÇ »ç¶÷µéÀÌ ´Ù ÀÖ´Â °æ¿ì
+			script.println("<script>");
+			script.println("alert('¹æÀÌ °¡µæÃ¡½À´Ï´Ù.');");
+			script.println("history.back()");
+			script.println("</script>");
+		}else{ // ³×¸ğ¾È¿¡ µé¾î¿À°Ô ÇÏ±â Àü¿¡ ÀÌ¹Ì ¹æ¿¡ ÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù.
+			if(isInNemo >= 1)
+			{// ÀÌ »ç¶÷Àº ¹æ¿¡ ¼ÓÇÑ ¸É¹öÀÎ°¡? 
+				System.out.println("Show nemo room"); // ¾Æ¹« ÀÏµµ ¾ÈÇÏ°í µğ¹ö±ë ¿ëÀ¸·Î ÄÜ¼Ö¿¡ Ãâ·ÂÇÑ´Ù. 
+			}
+			else{ // (¸¶½ºÅÍµµ ¾Æ´Ï°í ¹æ¿¡ ¼ÓÇÑ ¸É¹öµµ ¾Æ´Ï¶ó¸é)³×¸ğ¿¡ Áı¾î ³ÖÀÚ
+				pstmt.setInt(1, articleID); // articleID
+				pstmt.setString(2, loginID); // userID
+				pstmt.execute();
+			}
+		}
+		
+		if(rs.next()){ // ³×¸ğ Á¤º¸¸¦ Ç¥½ÃÇÏ´Â ±¸¹®
+			articleID = rs.getInt(1);
+			String startCity = rs.getString(2);
+			String endCity = rs.getString(3);
+			String startStation  = rs.getString(4);
+			String endSatation  = rs.getString(5);
+			String startTime   = rs.getString(6);
+			String endTime   = rs.getString(7);
+			String startDay   = rs.getString(8);
+			String masterUserID   = rs.getString(9);
+			String masterUserName   = rs.getString(10);
+			
+			// ¿©±â·Î ¿Å±è
+			if( masterUserID.equals(loginID) ){ // ÀÌ »ç¶÷Àº masterÀÎ°¡? [ÀÛ¾÷ÇÒ ¶§ ¾îÀúÇÇ NULLÀÌ¿©¼­ ÁÖ¼®Ã³¸®ÇÏ´Â°Ô ÁÁÀ½]
+				script.println("<script>");
+				script.println("alert('¾È³çÇÏ¼¼¿ä ¹æÀå´Ô');");
+				// script.println("history.back()");
+				script.println("</script>");
+			}
+%>
+
+<br>
+<h3 style="text-align: center;"><%=startCity %>(<%=startStation %>¿ª <%=startTime %>½Ã) Ãâ¹ß ~ <%=endCity %>(<%=endSatation %>¿ª <%=endTime %>½Ã)µµÂø</h3>
+<hr>
 
 <div class="container"  style="display: inline-block; text-align: center; display: inline-block;">
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <h3>ì±„íŒ…ë°©</h3>
+        <h3>Ã¤ÆÃ¹æ</h3>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -53,20 +155,44 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10">
-            <form method="post" action="loginOK.jsp">
+            <form method="post" action="#">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="ë³´ë‚´ë ¤ëŠ” ë©”ì‹œì§€ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!" name="useID" maxlength="30"">  
+					<input type="text" class="form-control" placeholder="º¸³»·Á´Â ¸Ş½ÃÁö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!" name="useID" maxlength="30"">  
 				</div>
 		        </div>
-		        <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="ë³´ë‚´ê¸°"/> </div>
+		        <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="º¸³»±â"/> </div>
         	</form>
         </div>
     </div>
     
-    <h3>(ì—¬ê¸°ì— ë°©ì— ë“¤ì–´ì˜¨ ì‚¬ëŒë“¤ì˜ ì´ë¦„ì´ ë“¤ì–´ê°‘ë‹ˆë‹¤. ì´ ëª‡ ëª…ì˜ ì‚¬ëŒì´ ìˆëŠ”ì§€ í‘œí˜„ë©ë‹ˆë‹¤. )</h3>
+    <div class="row">
+
+    <%
+    System.out.println("check point");
+    while(rsShowUserTable.next()) {
+    	String inUserName  = rsShowUserTable.getString(1);
+		System.out.println("User Name " + inUserName );
+    %>
+    	<div class="col-sm-3"><h4>Âü°¡ÀÚ: <%=inUserName %></h4></div>
+    <%
+    }  
+    %>`
+       
+      <!-- div class="col-sm-3"><h4>User2: </h4></div>  -->
+      <!--  div class="col-sm-3"><h4>User3: </h4></div>  -->
+    </div>
 </div>
 
-
+<% 
+	}
+	rs.close();
+	stmt.close();
+	pstmt.close();
+	conn.close();
+} catch(SQLException e) {
+	out.println( e.toString() );
+}
+%>
 	
 
 </body>

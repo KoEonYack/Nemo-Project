@@ -103,7 +103,7 @@ public class MemberDao {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet set = null;
-		String query = "select * from USER where userID = ?";
+		String query = "SELECT * FROM USER WHERE userID = ?";
 		MemberDto dto = null;
 		
 		try {
@@ -116,7 +116,7 @@ public class MemberDao {
 				dto = new MemberDto();
 				dto.setUserID(set.getString("userID"));
 				dto.setUserPassword(set.getString("userPassword"));
-				dto.setUserName(set.getString("userNames"));
+				dto.setUserName(set.getString("userName"));
 				dto.setStudentNumber(set.getString("studentNumber"));
 				dto.setPhoneNumber(set.getString("phoneNumber"));
 			}
