@@ -34,7 +34,7 @@
 	Statement stmt;
 	ResultSet rs;
 	try {
-		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
 		String dbID = "root";
 		String dbPassword = "1234";
 		Class.forName("com.mysql.cj.jdbc.Driver");
