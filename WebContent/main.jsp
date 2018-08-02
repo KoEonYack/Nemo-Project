@@ -29,9 +29,12 @@
 	
 <div class="container">
  <%
-	Statement [] stmt = new Statement[16];
-	ResultSet [] rs = new ResultSet[16];
-	int [] total = new int [16];
+	Statement [] stmt = new Statement[17];
+	ResultSet [] rs = new ResultSet[17];
+	int [] total = new int [17];
+	
+	String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
+	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 	
 	try {
 		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
@@ -40,7 +43,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		
-		for(int i=0; i<16;i++){
+		for(int i=0; i<17;i++){
 			stmt[i] = conn.createStatement();
 		}
 
@@ -60,6 +63,7 @@
 		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='전라남도'";
 		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='경상북도'";
 		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='경상남도'";
+		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID";
 		
 		rs[0] = stmt[0].executeQuery(c01);
 		rs[1] = stmt[1].executeQuery(c02);
@@ -77,8 +81,9 @@
 		rs[13] = stmt[13].executeQuery(c14);
 		rs[14] = stmt[14].executeQuery(c15);
 		rs[15] = stmt[15].executeQuery(c16);
+		rs[16] = stmt[16].executeQuery(c17);
 		
-		for(int i=0; i<16 ;i++){
+		for(int i=0; i<17 ;i++){
 			if(rs[i].next()){
 				total[i] = rs[i].getInt(1);
 			}else{
@@ -168,7 +173,7 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
    	      <a href="#"> <button type="button" class="btn btn-default"><p>#16경남</p> <br> <p> <%=total[15] %> </p></button> </a>&nbsp;&nbsp; 
-   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#내가 가입한 <br>  네모 보기 </p></button> </a>&nbsp;&nbsp; 
+   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#내가 가입한 <br>네모 보기 <br><%=total[16] %></p></button> </a>&nbsp;&nbsp; 
         </div>
         <div class="col-sm-3"></div>
     </div>

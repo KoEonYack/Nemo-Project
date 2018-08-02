@@ -28,8 +28,10 @@
 	
  
  
-<div class="container">
- 
+<div class="container"><br>
+ <h2>서울에서 출발하는 KTX 목록입니다.</h2>
+ <hr>
+ <br><br>
  <%
 	Statement stmt;
 	ResultSet rs;
