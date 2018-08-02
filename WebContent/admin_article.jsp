@@ -15,7 +15,7 @@
 </head>
 
 <%
-	String db = "jdbc:mysql://localhost:8181/NEMO?serverTimezone=UTC";
+	String db = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
 	String ID = "root";
 	String Password = "1234";
 	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -56,7 +56,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<span class ="glyphicon glyphicon-tags"></span>
-						&nbsp;&nbsp; Designed by HSHan
+						&nbsp;&nbsp; 관리자 모드
 					</h3>
 				</div>
 			<div class="panel-body">
