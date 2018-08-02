@@ -21,10 +21,10 @@
     <div class="col-sm-4">
     	<form method="post" action="LoginAction.jsp">
 			<div class="form-group">
-					<input type="text" class="form-control" placeholder="이름" name="userName" maxlength="30">  
+					<input type="text" class="form-control" placeholder="이름" name="root_name" maxlength="30">  
 			</div> 
 			<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="30">  
+					<input type="password" class="form-control" placeholder="비밀번호" name="root_password" maxlength="30">  
 			</div>
 			    <input type="submit" class="btn btn-primary form-control" value="로그인"/>
     		</form>
@@ -35,9 +35,6 @@
     <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-    
-    
-
     <br><br>
     </div>
     <div class="col-sm-4"></div>
@@ -45,10 +42,6 @@
     <br>
 	</div>
  </div>
- 
- 
- 
- 
 <br><br>
 </body>
 
