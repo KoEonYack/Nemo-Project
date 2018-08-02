@@ -79,8 +79,8 @@
 			
 	%>
 	<tbody>
-		<tr>
-			<td><a href="NemoRoom.jsp?articleID=<%=articleID%>"><%=articleID %></a></td>
+		<tr> <a href="NemoRoom.jsp?articleID=<%=articleID%>"> </a>
+			<td><%=articleID %></td>
 			<td><%=startCity %></td>
 			<td><%=endCity %></td>
 			<td><%=startStation %></td>
@@ -90,7 +90,7 @@
 			<td><%=startDay %></td>
 			<td><%=masterUserID %></td>
 			<td><%=masterUserName %></td>
-			<td><button type="button" class="btn btn-success">참가하기</button> </td>
+			<td><button type="button" class="btn btn-success" onclick="location.href='NemoRoom.jsp?articleID=<%=articleID%>'">참가하기</button> </td>
 		</tr>
   </tbody>
 	<% 

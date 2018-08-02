@@ -31,14 +31,19 @@
 	Statement stmt;
  	Statement stmt2;
  	Statement stmt3;
+ 	Statement stmt4;
  	
 	ResultSet rs;
 	ResultSet rsCount;
 	ResultSet rsCheckInNemoSQL;
+	ResultSet rsShowUserTable;
+	
 	PreparedStatement pstmt;
 	
 	String id = "";
 	String pass = "";
+	// String inUserName = "";
+	
 	int totalMember = 0;
 	int isInNemo = 0; 
 	int articleID = Integer.parseInt(request.getParameter("articleID"));
@@ -56,16 +61,20 @@
 		stmt = conn.createStatement();
 		stmt2 = conn.createStatement();
 		stmt3 = conn.createStatement();
+		stmt4 = conn.createStatement();
 		String sql = "SELECT * FROM Article WHERE articleID=" + articleID; // 현재 게시글의 모든 정보를 불러오는 쿼리
 		String userSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID; // 본 방에 들어온 유저의 개숫를 세는 쿼라ㅣ	
 		String checkInNemoSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID + " AND "+ "userID=" + loginID;
 		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // 네모에 가입하게 만드는 구문
+		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
 		
 		pstmt = conn.prepareStatement(insertNemoSQL); // insert를 위해서 미리 준비한 구문이다. 
 		
 		rs = stmt.executeQuery(sql);
 		rsCount = stmt2.executeQuery(userSQL);
 		rsCheckInNemoSQL = stmt3.executeQuery(checkInNemoSQL);
+		rsShowUserTable = stmt4.executeQuery(showUserTable);
+		
 		
 		// String checkMasterUserID = rs.getString(9); // 이 부분을 수정해야한다. rs.next()를 안쓰고 이것을 사용할 수 없을 것이다. 
 		
@@ -75,6 +84,11 @@
 		if(rsCheckInNemoSQL.next()){  // 유저가 방에 있는지 확인하는 부분
 			isInNemo = rsCheckInNemoSQL.getInt(1); 
 		}
+		/*
+		if(rsShowUserTable.next()){
+			inUserName = rsShowUserTable.getString(1); 
+		}
+		*/
 		
 		if(totalMember==3){ // 4명의 사람들이 다 있는 경우
 			script.println("<script>");
@@ -151,12 +165,21 @@
         </div>
     </div>
     
-    
     <div class="row">
-       <div class="col-sm-3"><h4>Master:<%=masterUserName %> </h4></div>
-       <div class="col-sm-3"><h4>User1: </h4></div>
-       <div class="col-sm-3"><h4>User2: </h4></div>
-       <div class="col-sm-3"><h4>User3: </h4></div>
+
+    <%
+    System.out.println("check point");
+    while(rsShowUserTable.next()) {
+    	String inUserName  = rsShowUserTable.getString(1);
+		System.out.println("User Name " + inUserName );
+    %>
+    	<div class="col-sm-3"><h4>참가자: <%=inUserName %></h4></div>
+    <%
+    }  
+    %>`
+       
+      <!-- div class="col-sm-3"><h4>User2: </h4></div>  -->
+      <!--  div class="col-sm-3"><h4>User3: </h4></div>  -->
     </div>
 </div>
 
