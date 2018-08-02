@@ -167,15 +167,19 @@
     
     <div class="row">
 
+	<div class="col-sm-3"><h4>방장: <%=masterUserName %></h4></div>
     <%
     System.out.println("check point");
+    
     while(rsShowUserTable.next()) {
     	String inUserName  = rsShowUserTable.getString(1);
 		System.out.println("User Name " + inUserName );
+		if(!masterUserName.equals(inUserName)){
     %>
     	<div class="col-sm-3"><h4>참가자: <%=inUserName %></h4></div>
     <%
-    }  
+    	}  
+	}
     %>`
        
       <!-- div class="col-sm-3"><h4>User2: </h4></div>  -->

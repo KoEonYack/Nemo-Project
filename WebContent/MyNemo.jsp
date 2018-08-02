@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,10 +8,9 @@
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="css/custom.css">
-	<title> �׸�(�ݿ� �� KTX ���ι���)</title>
+	<title> 네모(넷에 모여 KTX 할인받자)</title>
 </head>
  <body>
- 
  
  <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -20,17 +20,19 @@
       <div id="block1" > </div>
     </div>
     <ul class="nav navbar-nav navbar-right">
-    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   �׸��ϱ�</a></li>
-    	<li><a href="logout.jsp">�α׾ƿ�</a></li>
+    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>네모하기</a></li>
+    	<li><a href="logout.jsp">로그아웃</a></li>
     </ul>
     </div>
 </nav>
 	
- 
- 
 <div class="container">
- 
+  	 <br>
+	 <br>
+	 <h2>내가 들어간 네모 보기</h2>
+	 <hr>
  <%
+ // EUC - KR 문제를 해결하자ㅣ/....
 	Statement stmt;
 	ResultSet rs;
 	try {
@@ -40,8 +42,15 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
-		String sqlList = "SELECT * FROM Article WHERE startCity='����Ư����' ORDER BY articleID DESC";
-		String sqlCount = "SELECT COUNT(*) FROM board";
+
+		String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
+		String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
+		
+		// String sqlList = "SELECT * FROM enterUserToArticle AS UTA, Article WHERE UTA.userID=" + loginID + "AND UTA.articleID=Article.articleID ORDER BY articleID DESC";
+		String sqlList ="SELECT * FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID ORDER BY AT.startDay DESC";
+		// 내가 들어간 네모
+		// 아티클 id를 이용해서 join을 떄리자
+		System.out.println("loginID: " + loginID);
 		rs = stmt.executeQuery(sqlList);
 %>
 
@@ -51,16 +60,16 @@
 	 <thead>
 	 	<tr>
 		   <th>ID</th>
-		   <th>��� ����</th>
-		   <th>���� ����</th>
-		   <th>��� ��</th>
-		   <th>���� ��</th>
-		   <th>��� �ð�</th>
-		   <th>���� �ð�</th>
-		   <th>��� ��¥</th>
-		   <th>���� PK</th>
-		   <th>���� �̸�</th>
-		   <th>���� �ϱ�</th>
+		   <th>출발 도시</th>
+		   <th>도착 도시</th>
+		   <th>출발 역</th>
+		   <th>도착 역</th>
+		   <th>출발 시간</th>
+		   <th>도착 시간</th>
+		   <th>출발 날짜</th>
+		   <th>방장 PK</th>
+		   <th>방장 이름</th>
+		   <th>참가 하기</th>
 	   </tr>
 	 </thead>
 	   
@@ -85,7 +94,7 @@
 		<tr> 
 			<td><%=articleID %></td>
 			<td><%=startCity %></td>
-			<td><%=endCity %></td>
+			<td><%=endCity %></td>	
 			<td><%=startStation %></td>
 			<td><%=endSatation %></td>
 			<td><%=startTime %></td>
@@ -93,9 +102,10 @@
 			<td><%=startDay %></td>
 			<td><%=masterUserID %></td>
 			<td><%=masterUserName %></td>
-			<td><button type="button" class="btn btn-success" onclick="location.href='NemoRoom.jsp?articleID=<%=articleID%>'">�����ϱ�</button> </td>
+			<td><button type="button" class="btn btn-success" onclick="location.href='NemoRoom.jsp?articleID=<%=articleID%>'">방문하기</button> </td>
 		</tr>
   </tbody>
+  
 	<% 
 		}
 		rs.close();
@@ -106,7 +116,7 @@
 	}
 	%>
 	
-	 </table>
+ </table>
  </div>
 </body> 
 </html>

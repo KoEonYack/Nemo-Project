@@ -6,6 +6,14 @@
   height: 100;
 }
 
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+   width: 150;
+  height: 100;
+}
+
 
 #block1 { 
 	margin: 12px;  
