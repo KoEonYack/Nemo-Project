@@ -68,6 +68,8 @@
 		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // 네모에 가입하게 만드는 구문
 		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
 		
+		
+		
 		pstmt = conn.prepareStatement(insertNemoSQL); // insert를 위해서 미리 준비한 구문이다. 
 		
 		rs = stmt.executeQuery(sql);
@@ -136,7 +138,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <h3>채팅방</h3>
+        <h3>채팅방(<%=totalMember %>/4)</h3>
         </div>
         <div class="col-sm-3"></div>
     </div>
