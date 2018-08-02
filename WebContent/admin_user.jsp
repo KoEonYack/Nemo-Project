@@ -5,15 +5,14 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <%
-	String dbURL = "jdbc:mysql://localhost:8181/NEMO?serverTimezone=UTC";
-	String dbID = "root";
-	String dbPassword = "1234";
+	String db = "jdbc:mysql://localhost:8181/NEMO?serverTimezone=UTC";
+	String ID = "root";
+	String Password = "1234";
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	Statement stm=null;
 	ResultSet rs=null;
 	try {
-		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-		System.out.println("성공적으로 DB에 연결되었습니다.");
+		Connection conn = DriverManager.getConnection(db, ID, Password);
 		stm=conn.createStatement();
 		String query ="SELECT userName, studentNumber, userId, userPassword, phoneNumber FROM user";
 		rs=stm.executeQuery(query);

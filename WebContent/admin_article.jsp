@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    pageEncoding="EUC-KR"%>
+<%@page import="java.sql.*"%>
+<%@page import="nemo_project_root.*"%>
+<%@page import="java.io.PrintWriter"%>
+<% request.setCharacterEncoding("UTF-8"); %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +13,24 @@
 
 <title>Room Management</title>
 </head>
+
+<%
+	String db = "jdbc:mysql://localhost:8181/NEMO?serverTimezone=UTC";
+	String ID = "root";
+	String Password = "1234";
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Statement stm=null;
+	ResultSet rs=null;
+	try {
+		Connection conn = DriverManager.getConnection(db, ID, Password);
+		stm=conn.createStatement();
+		String query ="SELECT startStation, endSatation, startTime, endTime,masterUserID, masterUserName, phoneNumber FROM Article";
+		rs=stm.executeQuery(query);
+%>
 <body>
+
+
+
 	<nav class="navbar navbar-default">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"	
@@ -67,20 +88,32 @@
 						<th>Owner Name</th>
 					</tr>
 				</thead>
+					<%
+					while(rs.next()){
+					%>
 				<tbody>
 					<tr>
 						<td>
 						<div class="checkbox"><label><input type="checkbox" value="Delete"></label></div>
-						<td>16시 기차 타자</td>
-						<td>포항</td>
-						<td>서울</td>
-						<td>11:00</td>
-						<td>15:00</td>
-						<td>indiaprince</td>
-						<td>한현수</td>
+						<td>기차 타자</td>
+						<td><%rs.getString(3);%></td>
+						<td><%rs.getString(4);%></td>
+						<td><%rs.getString(5);%></td>
+						<td><%rs.getString(6);%></td>
+						<td><%rs.getString(8);%></td>
+						<td><%rs.getString(9);%></td>
 					</tr>
 				</tbody>
+				<%} %>
 			</table>
+						<%
+			rs.close();
+			stm.close();
+			conn.close();
+			}catch (Exception e){
+				out.println("err"+e.toString());
+			}
+			%>
 		</div>
 	</div>
 </div>
