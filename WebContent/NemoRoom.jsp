@@ -92,7 +92,7 @@
 		}
 		*/
 		
-		if(totalMember==3){ // 4명의 사람들이 다 있는 경우
+		if(totalMember==4){ // 4명의 사람들이 다 있는 경우
 			script.println("<script>");
 			script.println("alert('방이 가득찼습니다.');");
 			script.println("history.back()");
@@ -138,7 +138,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <h3>채팅방(<%=totalMember %>/4)</h3>
+        <h3>채팅방(<%=totalMember%>/4)</h3>
         </div>
         <div class="col-sm-3"></div>
     </div>
