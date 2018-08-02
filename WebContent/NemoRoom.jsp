@@ -68,6 +68,8 @@
 		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // 네모에 가입하게 만드는 구문
 		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
 		
+		
+		
 		pstmt = conn.prepareStatement(insertNemoSQL); // insert를 위해서 미리 준비한 구문이다. 
 		
 		rs = stmt.executeQuery(sql);
@@ -90,7 +92,7 @@
 		}
 		*/
 		
-		if(totalMember==3){ // 4명의 사람들이 다 있는 경우
+		if(totalMember==4){ // 4명의 사람들이 다 있는 경우
 			script.println("<script>");
 			script.println("alert('방이 가득찼습니다.');");
 			script.println("history.back()");
@@ -136,7 +138,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-        <h3>채팅방</h3>
+        <h3>채팅방(<%=totalMember%>/4)</h3>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -167,15 +169,19 @@
     
     <div class="row">
 
+	<div class="col-sm-3"><h4>방장: <%=masterUserName %></h4></div>
     <%
     System.out.println("check point");
+    
     while(rsShowUserTable.next()) {
     	String inUserName  = rsShowUserTable.getString(1);
 		System.out.println("User Name " + inUserName );
+		if(!masterUserName.equals(inUserName)){
     %>
     	<div class="col-sm-3"><h4>참가자: <%=inUserName %></h4></div>
     <%
-    }  
+    	}  
+	}
     %>`
        
       <!-- div class="col-sm-3"><h4>User2: </h4></div>  -->

@@ -14,7 +14,7 @@
 <body>
 
  <div class="container">
-	 <br>
+
 	 <div class="container"  style="display: inline-block;text-align: center;">
 	 <img src="data/main1.jpg" class="img-responsive center-block" alt="반응형 이미지">
  	

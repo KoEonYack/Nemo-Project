@@ -28,8 +28,10 @@
 	
  
  
-<div class="container">
- 
+<div class="container"><br>
+ <h2>서울에서 출발하는 KTX 목록입니다.</h2>
+ <hr>
+ <br><br>
  <%
 	Statement stmt;
 	ResultSet rs;
@@ -40,11 +42,11 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
-		String sqlList = "SELECT * FROM Article WHERE startCity='서울특별시' ORDER BY articleID DESC";
+		String sqlList = "SELECT * FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()+0  ORDER BY articleID DESC";
 		String sqlCount = "SELECT COUNT(*) FROM board";
 		rs = stmt.executeQuery(sqlList);
-		
 %>
+
 	<table class="table table-striped">
 	  <tr height="5"><td width="5"></td></tr>
 	 <!--  <tr style="background:url('img/table_mid.gif') repeat-x; text-align:center;">  -->
@@ -79,7 +81,10 @@
 			
 	%>
 	<tbody>
-		<tr> <a href="NemoRoom.jsp?articleID=<%=articleID%>"> </a>
+	<!-- 
+	<a href="NemoRoom.jsp?articleID=<%=articleID%>"> </a>
+	 -->
+		<tr> 
 			<td><%=articleID %></td>
 			<td><%=startCity %></td>
 			<td><%=endCity %></td>

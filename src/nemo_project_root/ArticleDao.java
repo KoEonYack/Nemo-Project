@@ -51,7 +51,7 @@ public class ArticleDao {
 			pstmt.setString(7, startDay); // 출발 날짜
 			pstmt.setString(8, masterUserID);
 			pstmt.setString(9, masterUserName);
-			pstmt.executeUpdate();
+			// pstmt.executeUpdate();
 			res = pstmt.executeUpdate();
 			System.out.println("=RES 값, 0은 실패를 의미한다.=" + res);
 		} catch (Exception e) {

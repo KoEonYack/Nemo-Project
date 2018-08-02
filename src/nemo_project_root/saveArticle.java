@@ -98,7 +98,7 @@ public class saveArticle extends HttpServlet {
 			if(sName.equals("StartCityName") || sName.equals("StartCityName") || sName.equals("startStation") 
 					|| sName.equals("endStation") || sName.equals("date") ||  sName.equals("startAndEndTime") ) {
 				session.removeAttribute(sName);
-				System.out.println("Delete 역정보");
+				System.out.println("Delete 세션정보");
 			}
 		}
 	}
