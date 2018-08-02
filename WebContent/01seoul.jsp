@@ -40,7 +40,8 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
-		String sqlList = "SELECT * FROM Article ORDER BY articleID DESC";
+		String sqlList = "SELECT * FROM Article WHERE startCity='서울특별시' ORDER BY articleID DESC";
+		String sqlCount = "SELECT COUNT(*) FROM board";
 		rs = stmt.executeQuery(sqlList);
 		
 %>
@@ -59,6 +60,7 @@
 		   <th>출발 날짜</th>
 		   <th>방장 PK</th>
 		   <th>방장 이름</th>
+		   <th>참가 하기</th>
 	   </tr>
 	 </thead>
 	   
@@ -76,8 +78,9 @@
 				String masterUserName   = rs.getString(10);
 			
 	%>
+	<tbody>
 		<tr>
-			<td><%=articleID %></td>
+			<td><a href="NemoRoom.jsp?articleID=<%=articleID%>"><%=articleID %></a></td>
 			<td><%=startCity %></td>
 			<td><%=endCity %></td>
 			<td><%=startStation %></td>
@@ -87,8 +90,9 @@
 			<td><%=startDay %></td>
 			<td><%=masterUserID %></td>
 			<td><%=masterUserName %></td>
+			<td><button type="button" class="btn btn-success">참가하기</button> </td>
 		</tr>
-	  
+  </tbody>
 	<% 
 		}
 		rs.close();

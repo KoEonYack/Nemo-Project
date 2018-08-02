@@ -15,11 +15,13 @@
 	String id = request.getParameter("useID");
 	String pw = request.getParameter("userPassword");
 	
+	
 	System.out.println(id + " " + pw );
 	
 	PrintWriter script = response.getWriter();
 	
 	MemberDao dao = MemberDao.getInstance();
+	MemberDto dto;
 	int checkNum = dao.userCheck(id, pw);
 	if(checkNum == -1) {
 	script.println("<script>");
@@ -32,7 +34,7 @@
 		script.println("history.go(-1);");
 		script.println("</script>");
 	} else if(checkNum == 1) {
-		MemberDto dto = dao.getMember(id);
+		dto = dao.getMember(id);
 		if(dto == null) {
 			script.println("<script>");
 			script.println("alert('존재하지 않는 회원 입니다.');");
@@ -45,6 +47,7 @@
 			session.setAttribute("id", id);
 			session.setAttribute("name", name);
 			session.setAttribute("pw", pw);
+			System.out.println("세션 id: " + id + "\n세션 이름" + name + "\npw" + pw);
 			response.sendRedirect("main.jsp");
 		}
 	}

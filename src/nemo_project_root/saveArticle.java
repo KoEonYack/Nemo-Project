@@ -53,8 +53,8 @@ public class saveArticle extends HttpServlet {
 		String startStationName = (String)session.getAttribute("startStationName");
 		String endSationCode = (String)session.getAttribute("endSationCode");
 		String endStationName = (String)session.getAttribute("endStationName");
-		String masterUserID = (String)session.getAttribute("masterUserID");
-		String masterUserName = (String)session.getAttribute("masterUserName");
+		String masterUserID = (String)session.getAttribute("id"); // 유저 id 
+		String masterUserName = (String)session.getAttribute("name"); // 유저 name
 		String startAndEndTime =  request.getParameter("startAndEndTime"); 
 		
 		response.setContentType("text/html; charset=EUC-KR");
