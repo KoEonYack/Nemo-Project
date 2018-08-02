@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
 <%@page import="nemo_project_root.*"%>
 <%@page import="java.io.PrintWriter"%>
-<% request.setCharacterEncoding("EUC-KR"); %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="nemo_project_root.MemberDto"/>
 <jsp:setProperty name="user" property="userName" />
 <jsp:setProperty name="user" property="userID" />
@@ -26,25 +26,25 @@
 	if (user.getUserID() == null || user.getUserPassword() == null || user.getUserName() == null || user.getStudentNumber() == null || user.getPhoneNumber() == null )
 	{
 		script.println("<script>");
-		script.println("alert('ÀÔ·ÂÇÏÁö ¾ÊÀº °ªÀÌ ÀÖ½À´Ï´Ù.');");
+		script.println("alert('ì…ë ¥í•˜ì§€ ì•Šì€ ê°’ì´ ìˆìŠµë‹ˆë‹¤.');");
 		script.println("document.location.href='index.jsp';");
 		script.println("</script>");
 	}
 	int ri = dao.insertMember(user);
 	if(ri == MemberDao.MEMBER_JOIN_SUCCESS) {
 		
-		// ¼¼¼Ç Ãß°¡ -> »èÁ¦ÇØ¾ßÇÔ ... °¡ÀÔÀÏ »ÓÀÎµ¥ ¿Ö ¼¼¼Ç¿¡´Ù°¡ ³Ö¾úÁö.... 
+		// ì„¸ì…˜ ì¶”ê°€ -> ì‚­ì œí•´ì•¼í•¨ ... ê°€ì…ì¼ ë¿ì¸ë° ì™œ ì„¸ì…˜ì—ë‹¤ê°€ ë„£ì—ˆì§€.... 
 		// session.setAttribute("id", user.getId());
 		// session.setAttribute("pw", user.getPw());
 		// session.setAttribute("name", user.getName());
 		
 		script.println("<script>");
-		script.println("alert('È¸¿ø°¡ÀÔÀ» ÃàÇÏ ÇÕ´Ï´Ù.');");
+		script.println("alert('íšŒì›ê°€ì…ì„ ì¶•í•˜ í•©ë‹ˆë‹¤.');");
 		script.println("document.location.href='index.jsp';");
 		script.println("</script>");
 	} else {
 		script.println("<script>");
-		script.println("alert('È¸¿ø°¡ÀÔ¿¡ ½ÇÆĞÇß½À´Ï´Ù.');");
+		script.println("alert('íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
 		script.println("document.location.href='index.jsp';");
 		script.println("</script>");
 	} 

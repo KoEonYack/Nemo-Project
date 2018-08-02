@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="nemo_project_root.MemberDto"%>
 <%@page import="nemo_project_root.MemberDao"%>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <%
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
 	
 	String id = request.getParameter("useID");
 	String pw = request.getParameter("userPassword");
@@ -25,25 +25,25 @@
 	int checkNum = dao.userCheck(id, pw);
 	if(checkNum == -1) {
 	script.println("<script>");
-	script.println("alert('¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.');");
+	script.println("alert('ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
 	script.println("history.go(-1);");
 	script.println("</script>");
 	} else if(checkNum == 0) {
 		script.println("<script>");
-		script.println("alert('ºñ¹Ğ¹øÈ£°¡ Æ²¸³´Ï´Ù.');");
+		script.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤.');");
 		script.println("history.go(-1);");
 		script.println("</script>");
 	} else if(checkNum == 1) {
 		dto = dao.getMember(id);
 		if(dto == null) {
 			script.println("<script>");
-			script.println("alert('Á¸ÀçÇÏÁö ¾Ê´Â È¸¿ø ÀÔ´Ï´Ù.');");
+			script.println("alert('ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íšŒì› ì…ë‹ˆë‹¤.');");
 			script.println("history.go(-1);");
 			script.println("</script>");
 		} else {
 			String name = dto.getUserName();
 			
-			// ¼¼¼Ç¿¡ °ª ÀúÀå
+			// ì„¸ì…˜ì— ê°’ ì €ì¥
 			session.setAttribute("id", id);
 			session.setAttribute("name", name);
 			session.setAttribute("pw", pw);

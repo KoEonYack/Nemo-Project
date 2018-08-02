@@ -22,6 +22,7 @@
     <ul class="nav navbar-nav navbar-right">
     	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   네모하기</a></li>
     	<li><a href="logout.jsp">로그아웃</a></li>
+    	<li><a href="sessionget.jsp">session get</a></li>
     </ul>
     </div>
 </nav>
