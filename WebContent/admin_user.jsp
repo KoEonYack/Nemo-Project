@@ -98,7 +98,7 @@
 					while(rs.next()){
 					%>
 					<tr>
-						<td><a href ="delete_user.jsp? del= <% rs.getString(4);%>">Delete</a>
+						<td><a href ="delete_user.jsp? del= <%=rs.getString(3)%>">Delete</a>
 						<td><%=rs.getString(1)%></td>
 						<td><%=rs.getString(4)%></td>
 						<td><%=rs.getString(2)%></td>

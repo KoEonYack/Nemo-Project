@@ -15,14 +15,14 @@ try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection conn = DriverManager.getConnection(db, ID, Password);
 	
-	String query ="DELETE FROM user where userPassword="+de; 
+	String query ="DELETE FROM user where userID="+de; 
 	stm=conn.prepareStatement(query);
-	//rs=stm.executeQuery(query);
 	stm.executeUpdate();
+	
 	stm.close();
 	conn.close();
-	response.sendRedirect("admin_user.jsp");
 }catch(Exception e){
 	out.print(e);
 }
+response.sendRedirect("admin_user.jsp");
 %>
