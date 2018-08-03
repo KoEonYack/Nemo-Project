@@ -79,7 +79,7 @@
 				<thead>
 					<tr>
 						<th>Delete</th>
-						<th>Room Name</th>
+						<th>Article ID</th>
 						<th>Starting Station</th>
 						<th>Destination Station</th>
 						<th>Start Time</th>
@@ -94,14 +94,15 @@
 					while(rs.next()){
 				%>
 					<tr>
-						<td><a href ="delete_article.jsp?del= <% rs.getString(9);System.out.println(rs.getString(9));%>">Delete</a>
+						<td><a href ="delete_article.jsp?del= <%=rs.getInt(1)%>">Delete</a>
 						<td>기차 타자</td>
 						<td><%=rs.getInt(1)%></td>
-						<td><%=rs.getString(2)%></td>
-						<td><%=rs.getString(3)%></td>
 						<td><%=rs.getString(4)%></td>
 						<td><%=rs.getString(5)%></td>
 						<td><%=rs.getString(6)%></td>
+						<td><%=rs.getString(7)%></td>
+						<td><%=rs.getString(9)%></td>
+						<td><%=rs.getString(10)%></td>
 					</tr>
 					<%	} %>
 				</tbody>
