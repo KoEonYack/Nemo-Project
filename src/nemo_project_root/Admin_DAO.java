@@ -15,23 +15,19 @@ public class Admin_DAO {
 	}
 	public int login(String id, String pw) {
 		int ri = 0;
-		System.out.println(ri);
 		String p;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet s = null;
 		String query = "SELECT password FROM ADMIN WHERE adminID = ?";
-		System.out.println(ri);
 		try {
 			
 			connection= getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setString(1, id);
 			s = pstmt.executeQuery();
-			System.out.println(ri);
 			if(s.next()) {
 				p = s.getString("password");
-				System.out.println(p);
 				if(p.equals(pw)) {
 					ri = 1;			
 				} else {
@@ -40,7 +36,6 @@ public class Admin_DAO {
 			} else {
 				ri = -1;	//not valid	
 			}
-			System.out.println(ri);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
