@@ -54,13 +54,18 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1 class="text-center">Welcome to Admin Main Page</h1>
+	<br></br>
+	<br></br>
+	<br></br>
 			<p class="text-center">If there are some managing issues</p>
+	<p></p>
 	<p></p>
 			<p class="text-left">
 				<a class="btn-primary btn=lg" id="button" href="admin_article.jsp" role="button">Article Management</a>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a class="btn-primary btn=lg" id="button" href="admin_user.jsp" role="button">User Management</a>
 			</p>
 			

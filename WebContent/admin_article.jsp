@@ -88,13 +88,14 @@
 						<th>Owner Name</th>
 					</tr>
 				</thead>
+
+				<tbody>
 					<%
 					while(rs.next()){
 					%>
-				<tbody>
 					<tr>
 						<td>
-						<div class="checkbox"><label><input type="checkbox" value="Delete"></label></div>
+						<td><a href ="delete_article.jsp?del_article= <% rs.getString(9);%>">Delete</a>
 						<td>기차 타자</td>
 						<td><%rs.getString(3);%></td>
 						<td><%rs.getString(4);%></td>
@@ -103,8 +104,9 @@
 						<td><%rs.getString(8);%></td>
 						<td><%rs.getString(9);%></td>
 					</tr>
+					<%} %>
 				</tbody>
-				<%} %>
+
 			</table>
 						<%
 			rs.close();
