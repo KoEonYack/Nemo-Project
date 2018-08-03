@@ -1,14 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.sql.*" %>
 <%@ page import= "java.io.PrintWriter" %>
+<%@ page import = "java.net.URLDecoder" %>
+
+
 <!DOCTYPE html">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="css/custom.css">
-	<title> ë„¤ëª¨(ë„·ì— ëª¨ì—¬ KTX í• ì¸ë°›ì)</title>
+	<title> ³×¸ğ(³İ¿¡ ¸ğ¿© KTX ÇÒÀÎ¹ŞÀÚ)</title>
 </head>
 
 <body>
@@ -21,34 +24,34 @@
       <div id="block1" > </div>
     </div>
     <ul class="nav navbar-nav navbar-right">
-    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ë„¤ëª¨í•˜ê¸°</a></li>
-    	<li><a href="logout.jsp">ë¡œê·¸ì•„ì›ƒ</a></li>
+    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ³×¸ğÇÏ±â</a></li>
+    	<li><a href="logout.jsp">·Î±×¾Æ¿ô</a></li>
     	<li><a href="sessionget.jsp">session get</a></li>
     </ul>
     </div>
 </nav>
 	
 <div class="container">
- <%
+  <% 
  	PrintWriter script=response.getWriter();
-	String userID = null;
+	
+ 	String userID = null;
 	
 	Statement [] stmt = new Statement[17];
 	ResultSet [] rs = new ResultSet[17];
 	int [] total = new int [17];
 	
+	String loginID = (String)session.getAttribute("id"); // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ »ç¿ëÀÚÀÇ id¸¦ °¡Á®¿À±â
+	String loginName= (String)session.getAttribute("name"); // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎÇÑ »ç¿ëÀÚÀÇ ÀÌ¸§À» °¡Á®¿À±â
 	
-	String loginID = (String)session.getAttribute("id"); // ì„¸ì…˜ì—ì„œ ë¡œê·¸ì¸í•œ ì‚¬ìš©ìì˜ idë¥¼ ê°€ì ¸ì˜¤ê¸°
-	String loginName= (String)session.getAttribute("name"); // ì„¸ì…˜ì—ì„œ ë¡œê·¸ì¸í•œ ì‚¬ìš©ìì˜ ì´ë¦„ì„ ê°€ì ¸ì˜¤ê¸°
-	System.out.println("Sessioncheck : " +  loginID + " : " +  loginName); // FOR DEBUGG CHECK LOGIN 
 	
-	if( loginID == null){
+	System.out.println("Session id: " + loginID + "\nSession name" + loginName);
+	if(session.getAttribute("id") == null){
 		script.println("<script>");
-		script.println("alert('ë¡œê·¸ì¸í•´ì£¼ì„¸ìš”!')");
+		script.println("alert('·Î±×ÀÎÇØÁÖ¼¼¿ä!')");
 		script.println("location.href='index.jsp'");
 		script.println("</script>");
-	}
-	
+	} 
 	
 	
 	try {
@@ -58,26 +61,27 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		
+		
 		for(int i=0; i<17;i++){
 			stmt[i] = conn.createStatement();
 		}
 
-		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='ì„œìš¸íŠ¹ë³„ì‹œ' AND startDay > CURDATE()+0";
-		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='ì„¸ì¢…íŠ¹ë³„ì‹œ' AND startDay > CURDATE()+0"; 
-		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='ë¶€ì‚°ê´‘ì—­ì‹œ' AND startDay > CURDATE()+0"; 
-		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='ëŒ€êµ¬ê´‘ì—­ì‹œ' AND startDay > CURDATE()+0";
-		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='ì¸ì²œê´‘ì—­ì‹œ' AND startDay > CURDATE()+0";
-		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='ê´‘ì£¼ê´‘ì—­ì‹œ' AND startDay > CURDATE()+0"; 
-		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='ëŒ€ì „ê´‘ì—­ì‹œ' AND startDay > CURDATE()+0";
-		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='ìš¸ì‚°ê´‘ì—­ì‹œ' AND startDay > CURDATE()+0";
-		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='ê²½ê¸°ë„' AND startDay > CURDATE()+0";
-		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='ê°•ì›ë„' AND startDay > CURDATE()+0";
-		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='ì¶©ì²­ë¶ë„' AND startDay > CURDATE()+0";
-		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='ì¶©ì²­ë‚¨ë„' AND startDay > CURDATE()+0";
-		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='ì „ë¼ë¶ë„' AND startDay > CURDATE()+0";
-		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='ì „ë¼ë‚¨ë„' AND startDay > CURDATE()+0";
-		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='ê²½ìƒë¶ë„' AND startDay > CURDATE()+0";
-		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='ê²½ìƒë‚¨ë„' AND startDay > CURDATE()+0";
+		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='¼­¿ïÆ¯º°½Ã' AND startDay > CURDATE()+0";
+		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='¼¼Á¾Æ¯º°½Ã' AND startDay > CURDATE()+0"; 
+		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='ºÎ»ê±¤¿ª½Ã' AND startDay > CURDATE()+0"; 
+		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='´ë±¸±¤¿ª½Ã' AND startDay > CURDATE()+0";
+		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='ÀÎÃµ±¤¿ª½Ã' AND startDay > CURDATE()+0";
+		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='±¤ÁÖ±¤¿ª½Ã' AND startDay > CURDATE()+0"; 
+		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='´ëÀü±¤¿ª½Ã' AND startDay > CURDATE()+0";
+		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='¿ï»ê±¤¿ª½Ã' AND startDay > CURDATE()+0";
+		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='°æ±âµµ' AND startDay > CURDATE()+0";
+		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='°­¿øµµ' AND startDay > CURDATE()+0";
+		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='ÃæÃ»ºÏµµ' AND startDay > CURDATE()+0";
+		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='ÃæÃ»³²µµ' AND startDay > CURDATE()+0";
+		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='Àü¶óºÏµµ' AND startDay > CURDATE()+0";
+		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='Àü¶ó³²µµ' AND startDay > CURDATE()+0";
+		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='°æ»óºÏµµ' AND startDay > CURDATE()+0";
+		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='°æ»ó³²µµ' AND startDay > CURDATE()+0";
 		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID  AND startDay > CURDATE()+0";
 		
 		rs[0] = stmt[0].executeQuery(c01);
@@ -104,34 +108,57 @@
 			}else{
 				System.out.println("Something wrong!");
 			}
-		}
+		} 
 %>
 
 
 <br><br>
 	  <div class="row">
         <div class="col-sm-3"></div>
-        <div class="col-sm-3"> <h3> ì¶œë°œ ë„ì‹œë¥¼ ëˆ„ë¥´ì„¸ìš”</h3><hr></div>
+        <div class="col-sm-3"> <h3> Ãâ¹ß µµ½Ã¸¦ ´©¸£¼¼¿ä</h3><hr></div>
         <div class="col-sm-3">
         	
         	<form action="search.jsp" method="post" > 
         	<nav class="navbar  navbar-expand-sm  bg-dark  navbar-dark">	
  	  			<div class="form-inline">
  	  				 <input class="form-control" type="text" placeholder="Search" name="startCity"/>
-  	 				 <input type="submit" class="btn btn-primary form-control" value="ì°¾ê¸°"/> 
+  	 				 <input type="submit" class="btn btn-primary form-control" value="Ã£±â"/> 
  			 
  			 </div> 
  			 </nav> </form>
         </div>
       	<div class="col-sm-3"></div> 
      </div> 
+     
+     <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">ÃÖ±Ù°Ë»ö¾î : </div>
+        <div class="col-sm-6">
+   	      <%
+   	   	 request.setCharacterEncoding("EUC-KR"); 
+   	    	
+   	     String startCity = null;
+   	     
+		 Cookie[] cookies = request.getCookies();
+		 System.out.println(cookies.length);
+   	   		
+		 	
+   	     	 for(int i=1; i<cookies.length-1; i++) {
+				startCity =  URLDecoder.decode(cookies[i].getValue(),"EUC-KR");
+				out.println(startCity);
+				System.out.println(i + ":" + startCity);
+		  	 }	
+		 	
+	%>
+        </div>
+    </div>
    
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="01seoul.jsp"> <button type="button" class="btn btn-default"><p>#01ì„œìš¸</p> <br> <p> <%=total[0] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="02city.jsp"> <button type="button" class="btn btn-default"><p>#02ì„¸ì¢…</p> <br> <p> <%=total[1] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="03city.jsp"> <button type="button" class="btn btn-default"><p>#03ë¶€ì‚°</p> <br> <p> <%=total[2] %> </p></button> </a>
+   	      <a href="01seoul.jsp"> <button type="button" class="btn btn-default"><p>#01¼­¿ï</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="02city.jsp"> <button type="button" class="btn btn-default"><p>#02¼¼Á¾</p> <br> <p>3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="03city.jsp"> <button type="button" class="btn btn-default"><p>#03ºÎ»ê</p> <br> <p> 3 </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -141,9 +168,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="04city.jsp"> <button type="button" class="btn btn-default"><p>#04ëŒ€êµ¬</p> <br> <p> <%=total[3] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="05city.jsp"> <button type="button" class="btn btn-default"><p>#05ì¸ì²œ</p> <br> <p> <%=total[4] %> </p></button> </a>&nbsp;&nbsp;  
-		  <a href="06city.jsp"> <button type="button" class="btn btn-default"><p>#06ê´‘ì£¼</p> <br> <p> <%=total[5] %> </p></button> </a>
+   	      <a href="04city.jsp"> <button type="button" class="btn btn-default"><p>#04´ë±¸</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="05city.jsp"> <button type="button" class="btn btn-default"><p>#05ÀÎÃµ</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+		  <a href="06city.jsp"> <button type="button" class="btn btn-default"><p>#06±¤ÁÖ</p> <br> <p> 3</p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -153,9 +180,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="07city.jsp"> <button type="button" class="btn btn-default"><p>#07ëŒ€ì „</p> <br> <p> <%=total[6] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="08city.jsp"> <button type="button" class="btn btn-default"><p>#08ìš¸ì‚°</p> <br> <p> <%=total[7] %> </p></button> </a>&nbsp;&nbsp;  
-		  <a href="09city.jsp"> <button type="button" class="btn btn-default"><p>#09ê²½ê¸°</p> <br> <p> <%=total[8] %> </p></button> </a>
+   	      <a href="07city.jsp"> <button type="button" class="btn btn-default"><p>#07´ëÀü</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="08city.jsp"> <button type="button" class="btn btn-default"><p>#08¿ï»ê</p> <br> <p> 3</p></button> </a>&nbsp;&nbsp;  
+		  <a href="09city.jsp"> <button type="button" class="btn btn-default"><p>#09°æ±â</p> <br> <p> 3 </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -165,9 +192,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="10city.jsp"> <button type="button" class="btn btn-default"><p>#10ê°•ì›</p> <br> <p> <%=total[9] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="11city.jsp"> <button type="button" class="btn btn-default"><p>#11ì¶©ë¶</p> <br> <p> <%=total[10] %> </p></button> </a>&nbsp;&nbsp;  
-		  <a href="12city.jsp"> <button type="button" class="btn btn-default"><p>#12ì¶©ë‚¨</p> <br> <p> <%=total[11] %> </p></button> </a>
+   	      <a href="10city.jsp"> <button type="button" class="btn btn-default"><p>#10°­¿ø</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="11city.jsp"> <button type="button" class="btn btn-default"><p>#11ÃæºÏ</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+		  <a href="12city.jsp"> <button type="button" class="btn btn-default"><p>#12Ãæ³²</p> <br> <p> 3 </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -177,9 +204,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="13city.jsp"> <button type="button" class="btn btn-default"><p>#13ì „ë¶</p> <br> <p> <%=total[12] %> </p></button> </a>&nbsp;&nbsp;  
-          <a href="14city.jsp"> <button type="button" class="btn btn-default"><p>#14ì „ë‚¨</p> <br> <p> <%=total[13] %> </p></button> </a>&nbsp;&nbsp;  
-		  <a href="15city.jsp"> <button type="button" class="btn btn-default"><p>#15ê²½ë¶</p> <br> <p> <%=total[14] %> </p></button> </a>
+   	      <a href="13city.jsp"> <button type="button" class="btn btn-default"><p>#13ÀüºÏ</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
+          <a href="14city.jsp"> <button type="button" class="btn btn-default"><p>#14Àü³²</p> <br> <p>3</p></button> </a>&nbsp;&nbsp;  
+		  <a href="15city.jsp"> <button type="button" class="btn btn-default"><p>#15°æºÏ</p> <br> <p> 3 </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -189,8 +216,8 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="16city.jsp"> <button type="button" class="btn btn-default"><p>#16ê²½ë‚¨</p> <br> <p> <%=total[15] %> </p></button> </a>&nbsp;&nbsp; 
-   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#ë‚´ê°€ ê°€ì…í•œ <br>ë„¤ëª¨ ë³´ê¸° <br><%=total[16] %></p></button> </a>&nbsp;&nbsp; 
+   	      <a href="16city.jsp"> <button type="button" class="btn btn-default"><p>#16°æ³²</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp; 
+   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#³»°¡ °¡ÀÔÇÑ <br>³×¸ğ º¸±â <br>3</p></button> </a>&nbsp;&nbsp; 
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -198,7 +225,7 @@
     <br>
    
     </div>
-	<% 
+	<%
 		for(int j=0; j<16; j++){
 			rs[j].close();
 			stmt[j].close();
