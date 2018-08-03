@@ -2,8 +2,8 @@ package nemo_project_root;
 
 public class Admin_DTO {
 	private
-	String Root_ID="root";
-	String Root_PW="root";
+	String Root_ID;
+	String Root_PW;
 	
 	public String getRootID() {
 		return Root_ID;

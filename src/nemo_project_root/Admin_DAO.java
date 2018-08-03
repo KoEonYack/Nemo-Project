@@ -15,21 +15,24 @@ public class Admin_DAO {
 	}
 	public int login(String id, String pw) {
 		int ri = 0;
-		String Pw;
-		
+		System.out.println(ri);
+		String p;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet s = null;
 		String query = "SELECT password FROM ADMIN WHERE adminID = ?";
+		System.out.println(ri);
 		try {
+			
 			connection= getConnection();
 			pstmt = connection.prepareStatement(query);
 			pstmt.setString(1, id);
 			s = pstmt.executeQuery();
-	
+			System.out.println(ri);
 			if(s.next()) {
-				Pw = s.getString("password");
-				if(Pw.equals(pw)) {
+				p = s.getString("password");
+				System.out.println(p);
+				if(p.equals(pw)) {
 					ri = 1;			
 				} else {
 					ri = 0;		//wrong password
@@ -37,7 +40,7 @@ public class Admin_DAO {
 			} else {
 				ri = -1;	//not valid	
 			}
-			
+			System.out.println(ri);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
