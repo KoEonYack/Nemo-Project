@@ -37,16 +37,18 @@
 	ResultSet [] rs = new ResultSet[17];
 	int [] total = new int [17];
 	
+	
 	String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
 	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
+	System.out.println("Sessioncheck : " +  loginID + " : " +  loginName); // FOR DEBUGG CHECK LOGIN 
 	
-	System.out.println("Session id: " + loginID + "\nSession name" + loginName);
-	if(session.getAttribute("userID") == null){
+	if( loginID == null){
 		script.println("<script>");
 		script.println("alert('로그인해주세요!')");
 		script.println("location.href='index.jsp'");
 		script.println("</script>");
 	}
+	
 	
 	
 	try {

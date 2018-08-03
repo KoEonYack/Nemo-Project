@@ -41,7 +41,7 @@
 	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 
 	System.out.println("Session id: " + loginID + "\nSession name" + loginName);
-	if(session.getAttribute("userID") == null){
+	if(session.getAttribute("userID") != null){
 		script.println("<script>");
 		script.println("alert('로그인해주세요!')");
 		script.println("location.href='index.jsp'");
