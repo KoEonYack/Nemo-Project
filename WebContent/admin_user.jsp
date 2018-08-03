@@ -5,7 +5,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <%
-	String db = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
+	String db = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
 	String ID = "root";
 	String Password = "1234";
 	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -98,12 +98,12 @@
 					while(rs.next()){
 					%>
 					<tr>
-						<td><a href ="delete_user.jsp?del_user= <% rs.getString(4);%>">Delete</a>
-						<td><%rs.getString(1);%></td>
-						<td><%rs.getString(4);%></td>
-						<td><%rs.getString(2);%></td>
-						<td><%rs.getString(3);%></td>
-						<td><%rs.getString(5);%></td>
+						<td><a href ="delete_user.jsp? del= <% rs.getString(4);%>">Delete</a>
+						<td><%=rs.getString(1)%></td>
+						<td><%=rs.getString(4)%></td>
+						<td><%=rs.getString(2)%></td>
+						<td><%=rs.getString(3)%></td>
+						<td><%=rs.getString(5)%></td>
 					</tr>
 					<%} %>
 				</tbody>

@@ -15,7 +15,7 @@
 </head>
 
 <%
-	String db = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
+	String db = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
 	String ID = "root";
 	String Password = "1234";
 	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,7 +24,7 @@
 	try {
 		Connection conn = DriverManager.getConnection(db, ID, Password);
 		stm=conn.createStatement();
-		String query ="SELECT startStation, endSatation, startTime, endTime,masterUserID, masterUserName, phoneNumber FROM Article";
+		String query ="SELECT * FROM Article";
 		rs=stm.executeQuery(query);
 %>
 <body>
@@ -92,19 +92,18 @@
 				<tbody>
 					<%
 					while(rs.next()){
-					%>
+				%>
 					<tr>
-						<td>
-						<td><a href ="delete_article.jsp?del_article= <% rs.getString(9);%>">Delete</a>
+						<td><a href ="delete_article.jsp?del= <% rs.getString(9);System.out.println(rs.getString(9));%>">Delete</a>
 						<td>기차 타자</td>
-						<td><%rs.getString(3);%></td>
-						<td><%rs.getString(4);%></td>
-						<td><%rs.getString(5);%></td>
-						<td><%rs.getString(6);%></td>
-						<td><%rs.getString(8);%></td>
-						<td><%rs.getString(9);%></td>
+						<td><%=rs.getInt(1)%></td>
+						<td><%=rs.getString(2)%></td>
+						<td><%=rs.getString(3)%></td>
+						<td><%=rs.getString(4)%></td>
+						<td><%=rs.getString(5)%></td>
+						<td><%=rs.getString(6)%></td>
 					</tr>
-					<%} %>
+					<%	} %>
 				</tbody>
 
 			</table>

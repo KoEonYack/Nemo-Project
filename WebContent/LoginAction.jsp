@@ -12,9 +12,12 @@
 </head>
 <body>
 	<%
-	// Admin_DAO dao=Admin_DAO.getInstance();
-	// int result=dao.login(request.getParameter("root_name"),request.getParameter("root_password"));    
-	int result=1; // <- db연동되는지 확인  미리 루트 계정 넣어놓고 시작.>
+	Admin_DAO dao=Admin_DAO.getInstance();
+	String id=request.getParameter("root_name");
+	String pw=request.getParameter("root_password");
+	
+	int result=dao.login(id,pw);    
+	//int result=1;//<- db연동되는지 확인  미리 루트 계정 넣어놓고 시작.>
 	if(result==1){
 		PrintWriter script=response.getWriter();
 		script.println("<script>");

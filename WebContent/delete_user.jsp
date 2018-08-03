@@ -5,18 +5,20 @@
 
 <% 
 String de=request.getParameter("del");
-String db = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
-String ID = "root";
-String Password = "1234";
-Class.forName("com.mysql.cj.jdbc.Driver");
-Statement stm=null;
+System.out.println(de);
+PreparedStatement stm=null;
 ResultSet rs=null;
 try {
+	String db = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+	String ID = "root";
+	String Password = "1234";
+	Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection conn = DriverManager.getConnection(db, ID, Password);
-	stm=conn.createStatement();
-	String query ="DELETE FROM user where studentNumber=" +request.getParameter("del_user");
-	rs=stm.executeQuery(query);
 	
+	String query ="DELETE FROM user where userPassword="+de; 
+	stm=conn.prepareStatement(query);
+	//rs=stm.executeQuery(query);
+	stm.executeUpdate();
 	stm.close();
 	conn.close();
 	response.sendRedirect("admin_user.jsp");
