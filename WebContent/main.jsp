@@ -156,9 +156,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="01seoul.jsp"> <button type="button" class="btn btn-default"><p>#01서울</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="02city.jsp"> <button type="button" class="btn btn-default"><p>#02세종</p> <br> <p>3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="03city.jsp"> <button type="button" class="btn btn-default"><p>#03부산</p> <br> <p> 3 </p></button> </a>
+   	      <a href="01seoul.jsp"> <button type="button" class="btn btn-default"><p>#01서울</p> <br> <p> <%=total[0] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="02city.jsp"> <button type="button" class="btn btn-default"><p>#02세종</p> <br> <p> <%=total[1] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="03city.jsp"> <button type="button" class="btn btn-default"><p>#03부산</p> <br> <p> <%=total[2] %> </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -168,9 +168,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="04city.jsp"> <button type="button" class="btn btn-default"><p>#04대구</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="05city.jsp"> <button type="button" class="btn btn-default"><p>#05인천</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-		  <a href="06city.jsp"> <button type="button" class="btn btn-default"><p>#06광주</p> <br> <p> 3</p></button> </a>
+   	      <a href="04city.jsp"> <button type="button" class="btn btn-default"><p>#04대구</p> <br> <p> <%=total[3] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="05city.jsp"> <button type="button" class="btn btn-default"><p>#05인천</p> <br> <p> <%=total[4] %> </p></button> </a>&nbsp;&nbsp;  
+		  <a href="06city.jsp"> <button type="button" class="btn btn-default"><p>#06광주</p> <br> <p> <%=total[5] %> </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -180,9 +180,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="07city.jsp"> <button type="button" class="btn btn-default"><p>#07대전</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="08city.jsp"> <button type="button" class="btn btn-default"><p>#08울산</p> <br> <p> 3</p></button> </a>&nbsp;&nbsp;  
-		  <a href="09city.jsp"> <button type="button" class="btn btn-default"><p>#09경기</p> <br> <p> 3 </p></button> </a>
+   	      <a href="07city.jsp"> <button type="button" class="btn btn-default"><p>#07대전</p> <br> <p> <%=total[6] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="08city.jsp"> <button type="button" class="btn btn-default"><p>#08울산</p> <br> <p> <%=total[7] %> </p></button> </a>&nbsp;&nbsp;  
+		  <a href="09city.jsp"> <button type="button" class="btn btn-default"><p>#09경기</p> <br> <p> <%=total[8] %> </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -192,9 +192,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="10city.jsp"> <button type="button" class="btn btn-default"><p>#10강원</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="11city.jsp"> <button type="button" class="btn btn-default"><p>#11충북</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-		  <a href="12city.jsp"> <button type="button" class="btn btn-default"><p>#12충남</p> <br> <p> 3 </p></button> </a>
+   	      <a href="10city.jsp"> <button type="button" class="btn btn-default"><p>#10강원</p> <br> <p> <%=total[9] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="11city.jsp"> <button type="button" class="btn btn-default"><p>#11충북</p> <br> <p> <%=total[10] %> </p></button> </a>&nbsp;&nbsp;  
+		  <a href="12city.jsp"> <button type="button" class="btn btn-default"><p>#12충남</p> <br> <p> <%=total[11] %> </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -204,9 +204,9 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="13city.jsp"> <button type="button" class="btn btn-default"><p>#13전북</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp;  
-          <a href="14city.jsp"> <button type="button" class="btn btn-default"><p>#14전남</p> <br> <p>3</p></button> </a>&nbsp;&nbsp;  
-		  <a href="15city.jsp"> <button type="button" class="btn btn-default"><p>#15경북</p> <br> <p> 3 </p></button> </a>
+   	      <a href="13city.jsp"> <button type="button" class="btn btn-default"><p>#13전북</p> <br> <p> <%=total[12] %> </p></button> </a>&nbsp;&nbsp;  
+          <a href="14city.jsp"> <button type="button" class="btn btn-default"><p>#14전남</p> <br> <p> <%=total[13] %> </p></button> </a>&nbsp;&nbsp;  
+		  <a href="15city.jsp"> <button type="button" class="btn btn-default"><p>#15경북</p> <br> <p> <%=total[14] %> </p></button> </a>
         </div>
         <div class="col-sm-3"></div>
     </div>
@@ -216,8 +216,8 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-   	      <a href="16city.jsp"> <button type="button" class="btn btn-default"><p>#16경남</p> <br> <p> 3 </p></button> </a>&nbsp;&nbsp; 
-   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#내가 가입한 <br>네모 보기 <br>3</p></button> </a>&nbsp;&nbsp; 
+   	      <a href="16city.jsp"> <button type="button" class="btn btn-default"><p>#16경남</p> <br> <p> <%=total[15] %> </p></button> </a>&nbsp;&nbsp; 
+   	       <a href="MyNemo.jsp"> <button type="button" class="btn btn-default" ><p>#내가 가입한 <br>네모 보기 <br><%=total[16] %></p></button> </a>&nbsp;&nbsp; 
         </div>
         <div class="col-sm-3"></div>
     </div>
