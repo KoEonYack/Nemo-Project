@@ -53,7 +53,7 @@
 	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 	
 	try {
-		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
 		String dbID = "root";
 		String dbPassword = "1234";
 		Class.forName("com.mysql.cj.jdbc.Driver");

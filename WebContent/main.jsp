@@ -114,12 +114,14 @@
         <div class="col-sm-3"> <h3> 출발 도시를 누르세요</h3><hr></div>
         <div class="col-sm-3">
         	
-        	<nav class="navbar  navbar-expand-sm  bg-dark  navbar-dark">
- 	  		 <form class="form-inline" action="#">
- 	  			 <input class="form-control" type="text" placeholder="Search">  
-  	 			 <button class="btn btn-success" type="submit">찾기</button>  
- 			 </form> 
-     		 </nav>
+        	<form action="search.jsp" method="post" > 
+        	<nav class="navbar  navbar-expand-sm  bg-dark  navbar-dark">	
+ 	  			<div class="form-inline">
+ 	  				 <input class="form-control" type="text" placeholder="Search" name="startCity"/>
+  	 				 <input type="submit" class="btn btn-primary form-control" value="찾기"/> 
+ 			 
+ 			 </div> 
+ 			 </nav> </form>
         </div>
       	<div class="col-sm-3"></div> 
      </div> 

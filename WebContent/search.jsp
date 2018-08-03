@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="java.io.PrintWriter"%>
+<!DOCTYPE html">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="css/custom.css">
-	<title> ³×¸ð(³Ý¿¡ ¸ð¿© KTX ÇÒÀÎ¹ÞÀÚ)</title>
+	<title> ë„¤ëª¨(ë„·ì— ëª¨ì—¬ KTX í• ì¸ë°›ìž)</title>
 </head>
- <body>
- 
- 
- <nav class="navbar navbar-default">
+
+<body>
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <div id="block1" > </div>
@@ -20,56 +20,69 @@
       <div id="block1" > </div>
     </div>
     <ul class="nav navbar-nav navbar-right">
-    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ³×¸ðÇÏ±â</a></li>
-    	<li><a href="logout.jsp">·Î±×¾Æ¿ô</a></li>
+    	<li><a href="regSelectCity.jsp">  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>   ë„¤ëª¨í•˜ê¸°</a></li>
+    	<li><a href="logout.jsp">ë¡œê·¸ì•„ì›ƒ</a></li>
     </ul>
     </div>
 </nav>
 	
- 
- 
-<div class="container"><br>
- <h2>¼­¿ï¿¡¼­ Ãâ¹ßÇÏ´Â KTX ¸ñ·ÏÀÔ´Ï´Ù.</h2>
- <hr>
- <br><br>
+<div class="container">
  <%
 	Statement stmt;
-	ResultSet rs;
+ 	ResultSet rs;
+	//PreparedStatement pstmt;
+	
+	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html; charset=UTF-8");
+	
+	String startCity = request.getParameter("startCity");
+	
+	response.setContentType("text/html; charset=UTF-8");
+	
+	PrintWriter script = response.getWriter();
+	
+	
 	try {
-		String dbURL = "jdbc:mysql://localhost:3306/NEMO?serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3306/NEMO?useSSL=false&serverTimezone=UTC";
 		String dbID = "root";
 		String dbPassword = "1234";
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
-		String sqlList = "SELECT * FROM Article WHERE startCity='¼­¿ïÆ¯º°½Ã' AND startDay > CURDATE()+0  ORDER BY articleID DESC";
-		String sqlCount = "SELECT COUNT(*) FROM board";
-		rs = stmt.executeQuery(sqlList);
-%>
-
-	<table class="table table-striped">
+		String sql =  "SELECT * FROM Article WHERE startCity=" + "\'" + startCity + "\'";// ì¶œë°œ ë„ì‹œ ê²€ìƒ‰ ì¿¼ë¦¬ 
+		//sql =str.replaceAll()
+		System.out.println(sql);
+		System.out.println("success");
+		rs = stmt.executeQuery(sql);
+		System.out.println("success");
+		System.out.println(startCity);
+		System.out.println(rs);
+		
+		%>
+		
+		<table class="table table-striped">
 	  <tr height="5"><td width="5"></td></tr>
 	 <!--  <tr style="background:url('img/table_mid.gif') repeat-x; text-align:center;">  -->
 	 <thead>
 	 	<tr>
 		   <th>ID</th>
-		   <th>Ãâ¹ß µµ½Ã</th>
-		   <th>µµÂø µµ½Ã</th>
-		   <th>Ãâ¹ß ¿ª</th>
-		   <th>µµÂø ¿ª</th>
-		   <th>Ãâ¹ß ½Ã°£</th>
-		   <th>µµÂø ½Ã°£</th>
-		   <th>Ãâ¹ß ³¯Â¥</th>
-		   <th>¹æÀå PK</th>
-		   <th>¹æÀå ÀÌ¸§</th>
-		   <th>Âü°¡ ÇÏ±â</th>
+		   <th>ì¶œë°œ ë„ì‹œ</th>
+		   <th>ë„ì°© ë„ì‹œ</th>
+		   <th>ì¶œë°œ ì—­</th>
+		   <th>ë„ì°© ì—­</th>
+		   <th>ì¶œë°œ ì‹œê°„</th>
+		   <th>ë„ì°© ì‹œê°„</th>
+		   <th>ì¶œë°œ ë‚ ì§œ</th>
+		   <th>ë°©ìž¥ PK</th>
+		   <th>ë°©ìž¥ ì´ë¦„</th>
+		   <th>ì°¸ê°€ í•˜ê¸°</th>
 	   </tr>
 	 </thead>
 	   
 	<%
 			while(rs.next()) {
 				int articleID = rs.getInt(1);
-				String startCity = rs.getString(2);
+				startCity = rs.getString(2);
 				String endCity = rs.getString(3);
 				String startStation  = rs.getString(4);
 				String endSatation  = rs.getString(5);
@@ -81,10 +94,7 @@
 			
 	%>
 	<tbody>
-	<!-- 
-	<a href="NemoRoom.jsp?articleID=<%=articleID%>"> </a>
-	 -->
-		<tr> 
+		<tr> <a href="NemoRoom.jsp?articleID=<%=articleID%>"> </a>
 			<td><%=articleID %></td>
 			<td><%=startCity %></td>
 			<td><%=endCity %></td>
@@ -95,7 +105,7 @@
 			<td><%=startDay %></td>
 			<td><%=masterUserID %></td>
 			<td><%=masterUserName %></td>
-			<td><button type="button" class="btn btn-success" onclick="location.href='NemoRoom.jsp?articleID=<%=articleID%>'">Âü°¡ÇÏ±â</button> </td>
+			<td><button type="button" class="btn btn-success" onclick="location.href='NemoRoom.jsp?articleID=<%=articleID%>'">ì°¸ê°€í•˜ê¸°</button> </td>
 		</tr>
   </tbody>
 	<% 
