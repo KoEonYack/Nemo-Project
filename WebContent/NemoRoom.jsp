@@ -74,6 +74,69 @@
 			alert.hide()
 		}, delay);
 	}
+	
+	/* 	메세지 출력형태 구성하는 부분, 실제 보여지는 부분
+	   	실제로 listType이라는 것을 서버로 보내서 listType에 맞는 모든 메세지를 
+	   	getToday()와 같은 함수를 이용하여 JSON과 같은 형태로 가져와서 client가 다시 받아서 
+	   	'data'에 담은 후 JSON 형태로 parsing해서 각각의 배열에 담긴 모든 값들을 차례대로 출력 */
+	function chatListFunction(type) {
+		
+		$.ajax({
+			type : "POST",
+			url : "./ChatListServlet",
+			data : {
+				listType : type,
+			},
+			success : function(data) {
+				
+				// parsing 가능한 data만 parsing하도록 data가 없는 경우는 바로 종료.
+				if (data == "") return;
+				
+				// JSON 형태로 data를 parsing할 수 있도록 
+				var parsed = JSON.parse(data);
+				// result : ChatListServlet에서 result.append해서 가져왔던 배열의 원소들 
+				var result = parsed.result;
+							
+				// 화면에 각각의 원소들을 출력하는 부분 
+				for (var i = 0; i < result.length; i++) {
+					addChat(result[i][0].value,
+							result[i][1].value,
+							result[i][2].value);
+				}
+				
+				// parsed에서 last라는 변수를 가져와서 lastID 갱신
+				lastID = Number(parsed.last);
+				// console.log(lastID);
+			}
+		});
+	}
+	/* 메세지를 하나 하나 출력하는 부분 */	
+	function addChat(userID, message, chatTime) {
+		
+		$('#chatList').append(
+					'<div class="row">'
+						+ '<div class = "col-lg-12">'
+						+ '<div class = "media">'
+						+ '<a class="pull-left" href="#">'
+						+ '<img class="media-object img-circle" src="images/go.png" alt="">'
+						+ '</a>' + '<div class="media-body">'
+						+ '<h4 class="media-heading">' + userID
+						+ '<span class="small pull-right">' + chatTime
+						+ '</span>' + '</h4>' + '<p>' + message
+						+ '</p>' + '</div>' + '</div>' + '</div>'
+						+ '</div>' + '<hr>');
+		
+		/* 메세지 리스트가 갱신될때 스크롤이 제일 최근의 메세지를 보여주는 상태가 되도록 설정  */
+		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+	}
+	
+	/* 	메세지를 실시간으로 계속 가져오는 함수
+		1000 : 1초마다 가져온다. 			*/
+	function getInfiniteChat() {
+		setInterval(function() {
+			chatListFunction(lastID);
+		}, 1000);
+	} 
 
 
 </script>
@@ -127,22 +190,22 @@
 	String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 	
 	try {
-		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC&useSSL=false&autoReconnect=true " ;
 		String dbID = "root";
 		String dbPassword = "1234";
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+		
 		stmt = conn.createStatement();
 		stmt2 = conn.createStatement();
 		stmt3 = conn.createStatement();
 		stmt4 = conn.createStatement();
-		String sql = "SELECT * FROM Article WHERE articleID=" + articleID; // 현재 게시글의 모든 정보를 불러오는 쿼리
-		String userSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID; // 본 방에 들어온 유저의 개숫를 세는 쿼라ㅣ	
+		
+		String sql = "SELECT * FROM Article WHERE articleID=\"" + articleID + "\""; // 현재 게시글의 모든 정보를 불러오는 쿼리
+		String userSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=\"" + articleID + "\""; // 본 방에 들어온 유저의 개숫를 세는 쿼라ㅣ	
 		String checkInNemoSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID + " AND "+ "userID=\"" + loginID + "\"";
 		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // 네모에 가입하게 만드는 구문
-		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
-		
-		
+		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=\"" + articleID + "\"";		
 		
 		pstmt = conn.prepareStatement(insertNemoSQL); // insert를 위해서 미리 준비한 구문이다. 
 		
@@ -313,18 +376,19 @@
 	stmt.close();
 	pstmt.close();
 	conn.close();
+	
 } catch(SQLException e) {
 	out.println( e.toString() );
 }
 %>
 
 	<!-- 페이지가 로딩이 완료되었을 때 수행할 것 -->
-<!-- 	<script type="text/javascript">
+ 	<script type="text/javascript">
 		$(document).ready(function() {
-			chatListFunction('ten');
-			getInfiniteChat();
+/* 			chatListFunction(lastID);
+ */			getInfiniteChat();
 		});
-	</script> -->
+	</script>
 	
 </body>
 </html>

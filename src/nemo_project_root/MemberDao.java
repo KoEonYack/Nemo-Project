@@ -154,7 +154,7 @@ public class MemberDao {
 		*/
 	
 		try {
-			String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+			String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC&useSSL=false&autoReconnect=true " ;
 			String dbID = "root";
 			String dbPassword = "1234";
 			Class.forName("com.mysql.cj.jdbc.Driver");

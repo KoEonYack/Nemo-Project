@@ -3,6 +3,7 @@ package nemo_project_root;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,10 +40,18 @@ public class ChatSubmitServlet extends HttpServlet {
 			response.getWriter().write("0");
 		} else { 
 			
-			// Dao()를 통해서 DB아 연동
+			// Dao()를 통해서 DB와 연동
 			// + "" : 공백 문자열을 더해줌으로서 무조건 문자열로 출력하도록 
 			System.out.println( articleID + " " + userID + " " + userName + " " + message );
-			response.getWriter().write(new Dao().submit( Integer.parseInt(articleID), userID, userName, message) + "");
+			try {
+				response.getWriter().write(new Dao().submit( Integer.parseInt(articleID), userID, userName, message) + "");
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}  
 
 	}

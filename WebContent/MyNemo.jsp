@@ -51,7 +51,7 @@
 	Statement stmt;
 	ResultSet rs;
 	try {
-		String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
+		String dbURL = "jdbc:mysql://localhost:3308/NEMO?useSSL=false&serverTimezone=UTC";
 		String dbID = "root";
 		String dbPassword = "1234";
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -63,7 +63,7 @@
 		//String loginName= (String)session.getAttribute("name"); // 세션에서 로그인한 사용자의 이름을 가져오기
 		
 		// String sqlList = "SELECT * FROM enterUserToArticle AS UTA, Article WHERE UTA.userID=" + loginID + "AND UTA.articleID=Article.articleID ORDER BY articleID DESC";
-		String sqlList ="SELECT * FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID AND  startDay > CURDATE()+0 ORDER BY AT.startDay DESC";
+		String sqlList ="SELECT * FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=\"" + loginID + "\" AND UTA.articleID=AT.articleID AND  startDay > CURDATE()-1 ORDER BY AT.startDay DESC";
 		// 내가 들어간 네모
 		// 아티클 id를 이용해서 join을 떄리자
 		System.out.println("loginID: " + loginID);

@@ -9,11 +9,11 @@ System.out.println(de);
 PreparedStatement stm=null;
 ResultSet rs=null;
 try {
-	String db = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC";
-	String ID = "root";
-	String Password = "1234";
+	String dbURL = "jdbc:mysql://localhost:3308/NEMO?serverTimezone=UTC&useSSL=false&autoReconnect=true " ;
+	String dbID = "root";
+	String dbPassword = "1234";
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection conn = DriverManager.getConnection(db, ID, Password);
+	Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 	
 	String query ="DELETE FROM user where userID="+de; 
 	stm=conn.prepareStatement(query);
