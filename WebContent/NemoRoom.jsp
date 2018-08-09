@@ -8,7 +8,76 @@
 	<meta name="viewport" content="width-device-width", initial-scale="1">
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
 	<link rel="stylesheet" href="css/custom.css">
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<title> 네모(넷에 모여 KTX 할인받자)</title>
+	
+	<script type="text/javascript">
+
+	// 가장 마지막 message(chatting) ID를 받아온다. 
+	var lastID = 0;
+	
+	// onclick "send button", store a message into DB
+	function submitFunction() {
+		
+		/* userID의 session값을 가져온다.  */
+		var userID = null; 
+		userID = "<%=(String)session.getAttribute("id")%>"
+		
+		var userName = null; 
+		userName = "<%=(String)session.getAttribute("name")%>"
+		
+		/* <textarea id="message">의 input값을 가져온다.  */
+		var message = $('#message').val();
+		
+ 		var articleID = null ;
+ 		articleID = "<%=(Integer)session.getAttribute("articleID")%>"
+ 		
+		/* ajax를 통해서 서버와 통신  */
+		$.ajax({
+			type : "POST",
+			url : "./ChatSubmitServlet",
+			
+			/* 	data : data sent to server
+				[parameter_name] : [actual value]  
+				encodeURIComponent( [field_name] ) : 특수문자 처리 */
+			data : {
+				articleID : encodeURIComponent(articleID),
+				userID : encodeURIComponent(userID),
+				userName : encodeURIComponent(userName),
+				message : encodeURIComponent(message)
+			},
+			
+			/* callback function at request success   */
+			success : function(result) {
+				console.log("result : " + result)
+				if (result == 1){
+					/* 전송 성공  */
+					autoClosingAlert('#successMessage', 2000);
+				} else if (result == 0) {
+					/* 어떤 내용이 비어 있다. */
+					autoClosingAlert('#dangerMessage', 2000);
+				} else {
+					/* DB 오류  */
+					autoClosingAlert('#warningMessage', 2000);
+				}
+			}
+		});
+		// reset message area with whitespace 
+		$('#message').val('');
+	}
+	
+	/* 메세지 전송 성공 알림창 - 떴다가 자동으로 다시 사라지는 기능  */
+	function autoClosingAlert(selector, delay) {
+		var alert = $(selector).alert();
+		alert.show();
+		window.setTimeout(function() {
+			alert.hide()
+		}, delay);
+	}
+
+
+</script>
+	
 </head>
 
 <body>
@@ -47,6 +116,11 @@
 	int totalMember = 0;
 	int isInNemo = 0; 
 	int articleID = Integer.parseInt(request.getParameter("articleID"));
+
+	// session.setAttribute( String_name, Object value )
+	// so article ID woul be save in Integer type
+	session.setAttribute("articleID", articleID);
+
 	PrintWriter script = response.getWriter();
 	
 	String loginID = (String)session.getAttribute("id"); // 세션에서 로그인한 사용자의 id를 가져오기
@@ -64,7 +138,7 @@
 		stmt4 = conn.createStatement();
 		String sql = "SELECT * FROM Article WHERE articleID=" + articleID; // 현재 게시글의 모든 정보를 불러오는 쿼리
 		String userSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID; // 본 방에 들어온 유저의 개숫를 세는 쿼라ㅣ	
-		String checkInNemoSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID + " AND "+ "userID=" + loginID;
+		String checkInNemoSQL = "SELECT COUNT(*) FROM enterUserToArticle WHERE articleID=" + articleID + " AND "+ "userID=\"" + loginID + "\"";
 		String insertNemoSQL = "INSERT INTO enterUserToArticle(articleID, userID) VALUES(?,?)"; // 네모에 가입하게 만드는 구문
 		String showUserTable = "SELECT userName FROM enterUserToArticle AS UTA, USER AS US WHERE UTA.userID=US.userID AND UTA.articleID=" + articleID;
 		
@@ -145,29 +219,74 @@
 </div>
 	
 
-<div class="container" style="display: inline-block; text-align: center; display: inline-block;">
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6" style="background:whitesmoke; overflow:scroll; height: 50%; width: 100%;  margin:0 auto; display: inline-block; vertical-align:middle" >
-        </div>
-        <div class="col-sm-3"></div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-10">
-            <form method="post" action="#">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="보내려는 메시지를 입력해주세요!" name="useID" maxlength="30"">  
+	
+		<div class="container">
+		<div class="container bootstrap snippet">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="portlet portlet-default">
+						<div class="portlet-heading">
+							<div class="portlet-title">
+								<h4><i class="fa fa-circle text-green"></i>채팅방</h4>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						
+						<!-- display message -->
+						<div id="chat" class="panel-collapse collapse in">
+							<div id="chatList" class="portlet-body chat-widget"
+								style="overflow-y: auto; width: auto; height: 600px;">
+							</div>
+						</div>
+						
+						<!-- message sending part -->
+						<div class="portlet-footer">
+						
+							<!-- name -->
+<!-- 							<div class="row">
+								<div class="form-group col-xs-4">
+									<input style="height: 40px;" type="text" id="userID"
+										class="form-control" placeholder="이름" maxlength="10">
+								</div>
+							</div> -->
+							
+							<!-- contents -->
+							<div class="row" style="height: 90px">
+								<div class="form-group col-xs-10">
+									<textarea style="height: 80px;" id="message"
+										class="form-control" placeholder="메시지를입력하시오" maxlength="100"></textarea>
+								</div>
+								
+								<!-- send button -->
+								<div class="form-group col-xs-2">
+								
+									<!-- javascript function "submitFunction" is called when click 'send'button -->
+									<button type=button " class="btn btn-default pull-right"
+										onclick="submitFunction();">전송</button>
+										
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-		        </div>
-		        <div class="col-sm-2"><input type="submit" class="btn btn-primary form-control" value="보내기"/> </div>
-        	</form>
-        </div>
-    </div>
-    
-    <div class="row">
+			</div>
+		</div>
+		
+		<!-- bootstrap을 이용한 메세지 전송 성공/실패 알림 메세지  -->
+		<div class="alert alert-success" id="successMessage"
+			style="display: none;">
+			<strong>메시지 전송에 성공하였습니다.</strong>
+		</div>
+		<div class="alert alert-danger" id="dangerMessage"
+			style="display: none;">
+			<strong>이름과 내용을 모두 입력해주세요.</strong>
+		</div>
+		<div class="alert alert-warning" id="warningMessage"
+			style="display: none;">
+			<strong>데이터베이스 오류가 발생했습니다.</strong>
+		</div>
+	</div>
 
 	<div class="col-sm-3"><h4>방장: <%=masterUserName %></h4></div>
     <%
@@ -182,10 +301,9 @@
     <%
     	}  
 	}
-    %>`
+    %>
        
-      <!-- div class="col-sm-3"><h4>User2: </h4></div>  -->
-      <!--  div class="col-sm-3"><h4>User3: </h4></div>  -->
+
     </div>
 </div>
 
@@ -199,7 +317,14 @@
 	out.println( e.toString() );
 }
 %>
-	
 
+	<!-- 페이지가 로딩이 완료되었을 때 수행할 것 -->
+<!-- 	<script type="text/javascript">
+		$(document).ready(function() {
+			chatListFunction('ten');
+			getInfiniteChat();
+		});
+	</script> -->
+	
 </body>
 </html>

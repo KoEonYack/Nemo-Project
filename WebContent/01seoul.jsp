@@ -42,7 +42,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		stmt = conn.createStatement();
-		String sqlList = "SELECT * FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()+0  ORDER BY articleID DESC";
+		String sqlList = "SELECT * FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()-1  ORDER BY articleID DESC";
 		String sqlCount = "SELECT COUNT(*) FROM board";
 		rs = stmt.executeQuery(sqlList);
 %>

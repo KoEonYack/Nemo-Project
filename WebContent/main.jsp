@@ -66,23 +66,23 @@
 			stmt[i] = conn.createStatement();
 		}
 
-		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()+0";
-		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='세종특별시' AND startDay > CURDATE()+0"; 
-		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='부산광역시' AND startDay > CURDATE()+0"; 
-		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='대구광역시' AND startDay > CURDATE()+0";
-		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='인천광역시' AND startDay > CURDATE()+0";
-		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='광주광역시' AND startDay > CURDATE()+0"; 
-		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='대전광역시' AND startDay > CURDATE()+0";
-		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='울산광역시' AND startDay > CURDATE()+0";
-		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='경기도' AND startDay > CURDATE()+0";
-		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='강원도' AND startDay > CURDATE()+0";
-		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='충청북도' AND startDay > CURDATE()+0";
-		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='충청남도' AND startDay > CURDATE()+0";
-		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='전라북도' AND startDay > CURDATE()+0";
-		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='전라남도' AND startDay > CURDATE()+0";
-		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='경상북도' AND startDay > CURDATE()+0";
-		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='경상남도' AND startDay > CURDATE()+0";
-		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=" + loginID + " AND UTA.articleID=AT.articleID  AND startDay > CURDATE()+0";
+		String c01 = "SELECT COUNT(*) FROM Article WHERE startCity='서울특별시' AND startDay > CURDATE()-1";
+		String c02 = "SELECT COUNT(*) FROM Article WHERE startCity='세종특별시' AND startDay > CURDATE()-1"; 
+		String c03 = "SELECT COUNT(*) FROM Article WHERE startCity='부산광역시' AND startDay > CURDATE()-1"; 
+		String c04 = "SELECT COUNT(*) FROM Article WHERE startCity='대구광역시' AND startDay > CURDATE()-1";
+		String c05 = "SELECT COUNT(*) FROM Article WHERE startCity='인천광역시' AND startDay > CURDATE()-1";
+		String c06 = "SELECT COUNT(*) FROM Article WHERE startCity='광주광역시' AND startDay > CURDATE()-1"; 
+		String c07 = "SELECT COUNT(*) FROM Article WHERE startCity='대전광역시' AND startDay > CURDATE()-1";
+		String c08 = "SELECT COUNT(*) FROM Article WHERE startCity='울산광역시' AND startDay > CURDATE()-1";
+		String c09 = "SELECT COUNT(*) FROM Article WHERE startCity='경기도' AND startDay > CURDATE()-1";
+		String c10 = "SELECT COUNT(*) FROM Article WHERE startCity='강원도' AND startDay > CURDATE()-1";
+		String c11 = "SELECT COUNT(*) FROM Article WHERE startCity='충청북도' AND startDay > CURDATE()-1";
+		String c12 = "SELECT COUNT(*) FROM Article WHERE startCity='충청남도' AND startDay > CURDATE()-1";
+		String c13 = "SELECT COUNT(*) FROM Article WHERE startCity='전라북도' AND startDay > CURDATE()-1";
+		String c14 = "SELECT COUNT(*) FROM Article WHERE startCity='전라남도' AND startDay > CURDATE()-1";
+		String c15 = "SELECT COUNT(*) FROM Article WHERE startCity='경상북도' AND startDay > CURDATE()-1";
+		String c16 = "SELECT COUNT(*) FROM Article WHERE startCity='경상남도' AND startDay > CURDATE()-1";
+		String c17 = "SELECT COUNT(*) FROM enterUserToArticle AS UTA, Article AS AT WHERE UTA.userID=\"" + loginID + "\" AND UTA.articleID=AT.articleID  AND startDay > CURDATE()-1";
 		
 		rs[0] = stmt[0].executeQuery(c01);
 		rs[1] = stmt[1].executeQuery(c02);
