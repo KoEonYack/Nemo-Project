@@ -40,7 +40,7 @@
 - 관리자 페이지에서 관리자는 웹 애플리케이션 이용자가 개설한 방을 관리(삭제, 수정)할 수 있습니다.  
 
 
-![admin2](https://github.com/KoEonYack/Nemo-Project/blob/master/img/admin_page2g?raw=true)
+![admin2](https://github.com/KoEonYack/Nemo-Project/blob/master/img/admin_page2?raw=true)
 - 관리자 페이지에서 사용자 정보를 한 눈에 볼 수 있습니다.  
 
 
